@@ -1,0 +1,21 @@
+00. Using Julia
+
+01. Arithmetic
+
+02. Names
+
+03. Vectors
+
+04. Functions
+
+05. Plotting
+
+06. Matrices
+
+07. Strings
+
+08. Logic and Control
+
+09. Files
+
+10. More on Graphics
