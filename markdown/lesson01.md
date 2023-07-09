@@ -31,7 +31,7 @@ After completing the lesson, you should know
 
 Although Julia's arithmetic is reasonably intuitive, certain intrinsic
 limitations of digital computer lead to some subtleties that can be
-confusing at first.
+confusing at first.  Consequently, this lesson is quite long.
 
 ## Basic Operations and Order of Precedence
 
@@ -210,12 +210,116 @@ decimal figures*.
 
 ## Inf and NaN
 
+The function call `typemax(Float64)` returns `Inf`, a special value that
+represents 'infinity'.  Likewise, `typemain(Float64)` returns `-Inf`.  
+Julia evaluates the expression
+```
+1.0/0.0
+```
+as `Inf`, and similarly evaluates `-1.0/0.0` as `-Inf`.  More interesting
+perhaps, is that expressions involving `Inf` can yield a finite results.
+For example, try the following.
+```
+atan(Inf)
+tahn(-Inf)
+cos(1/Inf)
+```
+However, there are some arithmetic expression that cannot be given any
+meaningful value, either finite or infinte.  For example, try the following.
+```
+0.0/0.0
+Inf - 2*Inf
+sin(Inf)
+log(-1.0)
+```
+In each case, the result is `NaN`, which stands for `Not-a-Number`.
+There is nothing magical about `Inf` and `NaN`: they are just special bit 
+patterns that you can look at by calling `bitstring(Inf)` and 
+`bitstring(NaN)`.
+
 ## Mixed-Mode Arithmetic
+
+The binary representation of an integer is different from the binary
+representation of the equivalent floating-point number, as you can
+easily observe by comparing `bitstring(5)` with `bitstring(5.0)`.
+Nevertheless, if you combine integer and floating-point values in an
+arithmetic expression, then Julia will *promote* each `Int64` to its
+corresponding `Float64` value to obtain a purely floating-point
+expression.  For example, `3 + 1/2` becomes `3.0 + 1.0/2.0` which evaluates
+to `3.5`.
+
+Notice that division is unusual as a binary operation, because the result
+`a/b` can have a different type from the operands `a` and `b`.  If `a` and
+`b` are of type `Int64`, then `a/b` is of type `Float64` even if `a/b` is
+a whole number.  Julia provides a function `div` for *integer division*.
+For example,
+```
+div(7, 2)
+```
+returns `3`.  The `divrem` function return both the quotient and remainder;
+thus,
+```
+q, r = divrem(7, 2)
+```
+give `q=3` and `r=1`.
 
 ## Rational Numbers
 
+The `//` operator is used to construct `Rational` numbers.  Doing
+```
+x = 3//4
+```
+creates a number `x` of type `Rational{Int64}`, which is really just a
+pair of integers, the numerator and denominator, that can be accessed as
+`x.num` and `x.den`, respectively.  Julia automatically cancels any 
+common factors, so for instance after doing
+```
+y = 7 // 21
+```
+we find that `y` equals `1//3`.  Rational arithmetic works as expected; thus,
+```
+5//13 - 19//2 + 7
+```
+evaluates to `-55//26`.
+
 ## Complex Numbers
+
+Just as a `Rational` number consists of a numerator and denominator, a
+`Complex` consists of a real and an imaginary part.  For example, if
+```
+z = 3.2 - 7.2im
+```
+then the real part `z.re` is `3.2`, and the imaginary part `z.im` is
+`-7.2`.  You could also construct `z` using the `complex` function:
+```
+z = complex(3.2, 7.2)
+```
+The `abs` and `angle` functions give the modulus and argument (phase)
+of a complex number.  Note that doing
+```
+w = 3 + 5im
+```
+makes `w` of type `Complex{Int64}`, that is, a complex number with integer
+real and imaginary parts.
+
+**Exercise.** What type is `im`?  What type is `im^2`?
 
 ## Summary
 
+In this lesson, you have learned about
+
+* the syntax and order of precedence of arithmetic operators;
+* the differences between integer and floating-point numbers;
+* the special floating-point numbers `Inf` and `NaN`;
+* exponential format, useful for very large or very small numbers;
+* why the accuracy of floating-point numbers is generally limited to
+about 15 significant (decimal) figures;
+* how to construct rational and complex numbers.
+
 ## Further Reading
+
+The Julia documentation includes a section on 
+[Integers and Floating-Point Numbers](https://docs.julialang.org/en/v1/manual/integers-and-floating-point-numbers/).
+A classic paper is David Golberg, [*What every computer scientist should
+know about floating-point arithmetic*](https://doi.org/10.1145/103162.103163),
+ACM Computing Surveys, Volume 23, pp 5-48, 1991.
