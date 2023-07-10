@@ -40,6 +40,8 @@ your own computer, you can download an installer from
 Windows, MacOS and Linux.  Windows users can also install Julia from the 
 Windows store.
 
+* * *
+
 ## The Julia REPL
 
 The term *REPL* is an acronym for *Read-Evaluate-Print-Loop*, and describes 
@@ -106,7 +108,7 @@ The REPL supports *tab completion* in many contexts.  For example, if you
 are not sure about the name of a Julia object you can try typing the first 
 few letters followed by Tab key.  
 
-**Exercise:** Type `?sin` followed by Tab.  You should see a list of several 
+**Exercise.** Type `?sin` followed by Tab.  You should see a list of several 
 functions.  Look up the help messages for some of them.
 
 ## Quitting from the REPL
@@ -149,14 +151,14 @@ you can start using the REPL immediately.
 
 ## Running .jl Files
 
-Download the file [`cubic.jl`](../downloads/cubic.jl) and save it to a 
+Download the file [`fibonacci.jl`](../downloads/fibonacci.jl) and save it to a 
 convenient folder.  In VSCode, click on the Explorer icon (the top one in 
 the left bar) or type Ctrl+Shift+E, and then click on the blue "Open Folder" 
-button and navigate to the folder containing `cubic.jl`.  A popup will ask 
+button and navigate to the folder containing `fibonacci.jl`.  A popup will ask 
 "Do you trust the authors of the files in this folder?".  Click on 
 "Yes, I trust the authors".
 
-You should see `cubic.jl` listed in the Explorer pane.  Click on the file 
+You should see `fibonacci.jl` listed in the Explorer pane.  Click on the file 
 name to open it in an editor pane, which should look like the screenshot 
 below.
 
@@ -165,25 +167,9 @@ below.
 Hover your mouse over the triangle in the top right of the editor pane (the 
 one shaped like a Play button).  The pop-up text should read 
 "Julia: execute active File in REPL".  Click on the triangle.  You should 
-see a plot pane showing a graph like the one below.
+see VSCode open a Julia REPL in a new pane, and display the output as follows.
 
-![cubic.png](../resources/cubic.png)
-
-**Exercise:** Create a new file `wave_packet.jl` that plots the curve
-$$
-y = e^{-x^2}\sin(7x)
-$$
-for $-\pi\le x\le\pi$.  You can use the File menu and select New File, or
-type Alt+Ctrl+N, or hover the mouse in the Explorer pane and look for a
-file icon with a plus sign.  Copy and paste the contents of `cubic.jl`,
-then edit the line that defines `y` so that it reads
-
-```
-y = exp.(-x.^2) .* sin.(7x)
-```
-
-Be careful with the dots, which are needed because the variable `x` is
-not a single number but a range of values.
+![](../resources/fibonacci_output.png)
 
 ## Summary
 
@@ -195,6 +181,8 @@ In this lesson you have seen how to
 * open a file in a VSCode editor pane;
 * execute code from a Julia source file;
 * display a help message about a Julia object;
+
+* * *
 
 ## Further Reading
 

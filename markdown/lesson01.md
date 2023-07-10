@@ -33,6 +33,8 @@ Although Julia's arithmetic is reasonably intuitive, certain intrinsic
 limitations of digital computer lead to some subtleties that can be
 confusing at first.  Consequently, this lesson is quite long.
 
+* * *
+
 ## Basic Operations and Order of Precedence
 
 The Julia symbol for each of the five main arithmetic operations is shown
@@ -315,6 +317,8 @@ In this lesson, you have learned about
 * why the accuracy of floating-point numbers is generally limited to
 about 15 significant (decimal) figures;
 * how to construct rational and complex numbers.
+
+* * *
 
 ## Further Reading
 
