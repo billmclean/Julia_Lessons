@@ -221,6 +221,23 @@ y = h2(3)
 ```
 the variable `y` gets assigned the value `16`.
 
+## Dot Syntax
+
+Consider once again the Julia function
+```
+f(x) = sin(4x) - log(x)
+```
+Given a vector `v`, the command
+```
+w = f.(v)
+```
+evaluates `f` for each element of `v` and assigns the result to the 
+corresponding element of a new vector `w`.  For example, if `v` has
+length `4`, then `w` will equal `[f(v[1]), f(v[2]), f(v[3]), f(v[4])]`.
+
+In general, we can make any scalar function operate elementwise on a vector 
+argument by inserting a dot before the parentheses in a function call.
+
 * * *
 
 ## Summary
@@ -231,7 +248,8 @@ In this lesson, you have learned how
 * positional and keyword arguments are passed to a function;
 * values are returned from a function;
 * to assign a default value to an argument;
-* the function body is a scoping unit for local variables.
+* the function body is a scoping unit for local variables;
+* the dot syntax is used to make a scalar function operate on a vector argument.
 
 ## Further Reading
 
