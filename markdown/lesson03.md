@@ -180,6 +180,27 @@ makes `z` a new vector `[-6, 7, 1]` with its own storage (so changing `z`
 will not change `x`).  In particular, `y = x[1:5]` or `y = x[:]` have
 the same effect as `y = copy(x)` if `x` is as above.
 
+Another example of a container type is a `Tuple`.  Like a vector, a tuple is
+an ordered collection.  The syntax for creating a tuple is like that for a
+vector, except using round brackets instead of square brackets.  For example,
+```
+t = (2, -1, 9, 7)
+```
+defines a tuple with `length(t)` equal to `4`, and indexing works in the same
+way as for vectors: `t[1]` equals `2`, `t[2]` equals `-1`, `t[3]` equals `9`
+and `t[4]` equals `7`.  
+
+However, unlike a vector, a tuple is *immutable*.  Thus, although an
+assignment like `a = t[3]` is perfectly fine, attempting to do something
+like `t[3] = 5` will raise an error.  The only way to change `t[3]` is to
+create a new tuple and assign it to `t`:
+```
+t = (2, -1, 5, 7)
+```
+Also, the vector arithmetic operations are not defined for tuples.  Tuples
+can be useful in managing function arguments and return values, a topic we
+cover in the next lesson.
+
 * * *
 
 ## Summary
