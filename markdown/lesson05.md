@@ -111,6 +111,7 @@ type commands into a `.jl` file rather than directly in the REPL.  Open
 a new editor pane in VSCode, type the following lines of code and save to 
 a file `sine_plot.jl`.
 ```
+Using Plots
 x = range(0, 2π, length=201)
 y = sin.(x)
 plot(x, y, 
@@ -124,7 +125,11 @@ Running this program produces the plot shown below.
 ![Annotated plot](../resources/annotated_plot.png)
 
 We see effect of the keyword arguments `xlabel`, `ylabel`, `title` and `legend` 
-on the output of the `plot` function.
+on the output of the `plot` function.  The code would work if you omitted
+the first line (`using Plots`) because `Plots` was loaded earlier in the
+same REPL session.  However, this line is needed if you want to ensure the 
+code will work in any future REPL session (when you might not have already
+loaded `Plots`).
 
 ## Multiple Plots
 
@@ -136,24 +141,135 @@ in the REPL, and observe how the figure changes after each line.
 x = range(0, π, length=201)
 y1 = sin.(3x)
 plot(x, y1)
-y2 = cos.(2x)
+y2 = cos.(2x .- π)
 plot!(x, y2)
 y3 = 0.5 * sin.(2x .+ π/4)
 plot!(x, y3)
 ```
+The final version of the plot should be as shown below.
 
+![Multiple series](../resources/multiple_series.png)
 
+## Saving to a File
 
-
+The `savefig` function lets you save a copy of your plot as `.png`
+or `.pdf` file:
+```
+savefig("myplot.png")
+```
+or
+```
+savefig("myplot.pdf")
+```
 
 ## Subplots
 
+We have seen how to plot multiple series on a single pair of axes.  It is
+also possible to display several *subplots*, that is, to display several
+series on different pairs of axes.  Type the following lines into a file
+`my_subplots.jl` and then run the code.
+```
+using Plots
+x1 = range(-4, 4, length=201)
+y1 = exp.(-x1.^2)
+p1 = plot(x1, y1, subplot=1, legend=false)
+x2 = range(0, 10, length=201)
+y2 = log.(x) .* sinpi.(x)
+p2 = plot(x2, y2, subplot=2, legend=false)
+plot(p1, p2, layout=(2, 1))
+savefig("my_subplots.png")
+```
+Here, we create to `Plot` objects `p1` and `p2`, and then plot them
+using the `plot` command with the `layout` keyword argument.  In this case,
+the `(2,1)` layout means that the subplots appear in a $2\times1$ grid,
+as shown below.
+
+![Subplots](../resources/my_subplots.png)
+
 ## Axis Tweaks
 
+We can adjust the location and labels of the tick marks on an axis using
+the `xticks` and `yticks` keyword arguments.  For example,
+```
+x = range(0, 2π, length=201)
+y = sin.(x)
+plot(x, y, legend=false,
+     xticks = ([0, π/2, π, 3π/2, 2π], ["0", "π/2", "π", "3π/2", "2π"]))
+```
+produces
+
+![](../resources/xticks_example.png)
+
+Manual adjustment of axis limits is also possible, using the `xlims` and
+`ylims` keywords.  Consider
+```
+x = range(0, 2, length=201)
+y = 1 .+ 0.1 * cospi.(x)
+p1 = plot(x, y, legend=false)
+p2 = plot(x, y, ylims=(0, 1.5), legend=false)
+plot(p1, p2, layout=(1, 2))
+```
+which produces
+
+![](../resources/ylims_example.png)
+
 ## Polar Plots and Histograms
+
+Let $r$ and $\theta$ denote the usual polar coordinates so that
+$$
+x=r\cos\theta\quad\text{and}\quad y=r\sin\theta.
+$$
+We can plot the curve $r=1+\cos\theta$ for $-\pi\le\theta\le\pi$ as follows.
+```
+θ = range(-π, π, length=201)
+r = 1 .+ cos.(θ)
+plot(θ, r, projections=:polar, legend=false)
+```
+The output looks like
+
+![Polar plot](../resources/polar_example.png)
+
+A histogram is often useful when investigating statistical data.  For
+example, suppose we take 1,000 random numbers from a standard normal 
+distribution.
+```
+x = randn(1000)
+histogram(x, bins=range(-4, 4, length=17))
+```
+You can also normalise the histogram so that its area equals 1 and is
+therefore a probability distribution: the commands
+```
+normal_pdf(x) = exp(-x.^2/2) / sqrt(2π)
+sample = randn(1000)
+histogram(sample, bins=range(-4, 4, length=17), 
+               normalized=:pdf, label="Sample PDF")
+plot!(normal_pdf, label="Exact PDF", linewidth=2)
+```
+produce the following output.
+
+![Histogram](../resources/histogram_example.png)
 
 * * *
 
 ## Summary
 
+In this lesson, we saw how to
+
+* use the `range` function to generate a range of $x$-values in a 
+chosen interval;
+* use the `plot` command to display a curve;
+* use the `scatter` command to display discrete data values;
+* modify the line style and colour of plot;
+* annote the plot with axis labels and a title;
+* draw multiple plot curves in the same or in different subplots;
+* save a plot to a file;
+* draw polar plots and histograms.
+
 ## Further Reading
+
+The `Plots` package has
+[many other features](https://docs.juliaplots.org/stable/), some of which 
+we will cover in a later lesson.  A variety of specialised plot types can
+be generated using the 
+[`StatsPlots`](https://docs.juliaplots.org/stable/generated/statsplots/)
+package.
