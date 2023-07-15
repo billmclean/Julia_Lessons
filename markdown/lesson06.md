@@ -112,6 +112,7 @@ creates a $1\times4$ matrix, or if you like a *row vector*.
 
 ## Indexing
 
+The indexing conventions for vectors generalise to matrices in a natural way.
 The element of `A` in row `i` and column `j` is referenced as `A[i,j]`,
 and is said to have *row index* `i` and *column index* `j`.  For example, if
 ```
@@ -132,3 +133,5 @@ In particular, `E[:,j]` returns the `j`th column of `E`, and
 `E[i,:]` returns the `i`th row of `E`.  Note that both have the same type
 `Vector{Int64}`, even though mathematically one is a column vector and the
 other a row vector.
+
+
