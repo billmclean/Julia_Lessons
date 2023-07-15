@@ -243,7 +243,7 @@ normal_pdf(x) = exp(-x.^2/2) / sqrt(2π)
 sample = randn(1000)
 histogram(sample, bins=range(-4, 4, length=17), 
                normalized=:pdf, label="Sample PDF")
-plot!(normal_pdf, label="Exact PDF", linewidth=2)
+plot!(normal_pdf, label="Std Normal PDF", linewidth=2)
 ```
 produce the following output.
 
