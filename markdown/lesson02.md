@@ -119,15 +119,15 @@ Assign the appropriate values to variables called `a`, `b`, `c` and
 
 The `*` may be omitted following a numeric literal coefficient so that,
 for example, Julia interprets `2x` as `2 * x`, and `5(a+3)` as `5 * (a+3)`.
-Parenthesised expressions can also be used as coefficients to variables, so
-that `(2x+3)y` is interpreted as `(2x+3) * y`.  However, `y(2x+3)` will
-be interpreted as a function `y` being called with actual argument `2x+3`.
-
 There are a few exceptions.  In particular, `3.2e-5` is always interpreted
 as the floating-point number `3.2\times 10^{-5}`, and not `3.2 * e - 5`.
 
 **Exercise.** Perform some experiments to determine if `2x^2` is interpreted
 as `(2x)^2` or `2(x^2)`.  What about `2^2x`?
+
+Parenthesised expressions can also be used as coefficients to variables, so
+that `(2x+3)y` is interpreted as `(2x+3) * y`.  However, `y(2x+3)` will
+be interpreted as a function `y` being called with actual argument `2x+3`.
 
 ## Unicode
 
