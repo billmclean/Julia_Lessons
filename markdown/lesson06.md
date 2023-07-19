@@ -184,7 +184,7 @@ the second column, and so on.
 Addition of matrices is defined elementwise, consistent with the usual
 definition from linear algebra: if `C = A + B` then `C[i,j] = A[i,j] + B[i,j]`
 for all `i` and `j`.  Of course, this operation makes sense only if
-`size(A)` equals `size(B)`; otherwise, Julia will raise a `DimensionMismatch`
+`size(A)` equals `size(B)`; otherwise, Julia will throw a `DimensionMismatch`
 error.  The usual mixed-mode arithmetic works, so if `A` is an `Int64` matrix
 and `B` is a `Float64` matrix, then `A + B` will be a `Float64` matrix.
 
@@ -198,7 +198,7 @@ $$
 $$
 If the inner dimensions do not agree, that is, if the number of columns of `A`
 differs from the number of rows of `B`, then `A * B` is not defined and
-Julia will raise a `DimensionMismatch` error.  A vector is treated like
+Julia will throw a `DimensionMismatch` error.  A vector is treated like
 a with one column, so the matrix-vector product `A * v` will be defined
 if and only if `size(A, 2)` equals `length(v)`.
 

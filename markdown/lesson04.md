@@ -183,7 +183,7 @@ sqrt_dscr
 The `include` statement just reads the lines from the file `solve_quadratic.jl`
 into the REPL.  The call to `solve_quadratic` returns the zeros of `x^2-5x+2`, 
 but attempting to see the value of the local variable `sqrt_dscr` outside the 
-body of the function raises an `UndefVarError`.  Similarly, you cannot 
+body of the function throws an `UndefVarError`.  Similarly, you cannot 
 reference the local variables `x_plus` and `x_minus`, although their values are 
 available from `xp` and `xm` since the function call effectively results in the
 assignments `xp = x_plus` and `xm = x_minus`.  

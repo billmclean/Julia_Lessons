@@ -161,7 +161,7 @@ q = "∀ ϵ > 0 ∃ > 0"
 We find that `length(q)` returns `13`, the number of characters, but
 `ncodeunits(q)` returns `18`, because some of the characters require more
 than one code unit.  In particular, `'∀'` uses three code units, and we
-find that `q[1]` gives `'∀'`, but `q[2]` and `q[3]` each raise a
+find that `q[1]` gives `'∀'`, but `q[2]` and `q[3]` each throw a
 `StringIndexError`.  Putting
 ```
 i = eachindex(q)

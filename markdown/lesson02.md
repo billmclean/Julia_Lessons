@@ -196,7 +196,7 @@ import Dates
 ```
 which makes the name `Dates` available but not the names that the module 
 *exports*.  Thus, you will find that `t = Date(1956, 6, 19)` no longer works; 
-Julia raises an `UndefVarError`.  Instead, you must use the *qualified name*,
+Julia throws an `UndefVarError`.  Instead, you must use the *qualified name*,
 as follows
 ```
 t = Dates.Date(1956, 6, 19)

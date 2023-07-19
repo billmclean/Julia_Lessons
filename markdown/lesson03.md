@@ -35,7 +35,7 @@ In this case, `typeof(a)` will return `Vector{Int64}` since each element of
 In Julia, array indices start at `1`, and elements are referenced using 
 square brackets: `v[1]` is the first element, `v[2]` is the
 second element, and so on.  The `length` function returns the number of 
-elements in a vector.  Julia raises a `BoundsError` if you attempt to 
+elements in a vector.  Julia throws a `BoundsError` if you attempt to 
 reference `v[i]` for an index `i` outside the range from `1` to `length(v)`.
 The last element in a vector `v` can be referenced as
 ```
@@ -192,7 +192,7 @@ and `t[4]` equals `7`.
 
 However, unlike a vector, a tuple is *immutable*.  Thus, although an
 assignment like `a = t[3]` is perfectly fine, attempting to do something
-like `t[3] = 5` will raise an error.  The only way to change `t[3]` is to
+like `t[3] = 5` will throw an error.  The only way to change `t[3]` is to
 create a new tuple and assign it to `t`:
 ```
 t = (2, -1, 5, 7)
