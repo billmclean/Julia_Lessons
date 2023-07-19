@@ -9,7 +9,7 @@ date: 2023-07-18
 
 So far in these lessons we have worked with a variety of data types including
 `Int64`, `Float64`, `Complex`, `Vector`, `Matrix` and `String`.  The `Bool`
-type takes only two values `true` and `false`, and is useful whenever you want
+type takes only two values, `true` and `false`, and is useful whenever you want
 to execute a group of statements selectively, based on whether or not a
 condition is true.
 
@@ -68,7 +68,7 @@ We can use these operators in combinations with the comparison operators
 to build up logical expressions.  The comparison operators have the highest
 priority, followed by `!`, and finally by `&&` and `||`.  The expressions
 are evaluated from left to right.  In practice, it is best to use
-parentheses to the meaning clear at a glance.
+parentheses so the meaning clear at a glance.
 
 **Exercise.** Work out the truth value for each of the following expressions,
 and check your answers by typing them in the REPL.
@@ -103,7 +103,7 @@ end
 ```
 where `<condition>` can be any logical expression, and `<statements>` can
 be any sequence of statements.  If `<condition>` evaluates to `true`,
-the Julia will execute the `<statements>`.  Otherwise, if `<condition>`
+then Julia will execute the `<statements>`.  Otherwise, if `<condition>`
 evaluates to `false`, then the `<statements>` are skipped and the thread
 of control passes the next statement following the `end` line. 
 
@@ -114,7 +114,7 @@ if <condition1>
 elseif <condition2>
     <statements2>
 else
-    <statemetns3>
+    <statements3>
 end
 ```
 In this case,
@@ -181,13 +181,25 @@ function solve_quadratic(a::Real, b::Real, c::Real)
     if a == 0
         throw( ArgumentError("The coefficient of x^2 must be non-zero") )
     end
+    ...
 ```
 Here, we have added a *type assertion* to each argument: if any
 of `a`, `b` or `c` is not a subtype of `Real`, then Julia will raise a
 `MethodError`.  Also, if `a` is zero (and `b` and `c` are real), then the
 function raises an `ArgumentError`, halting execution before the rest of
-the function body is reached.  Note that `a == 0` evalutes to `true` when
+the function body is reached.  Note that `a == 0` evaluates to `true` when
 `a` is zero, regardless whether `a` is an integer a floating-point type.
+
+If we were to implement, in addition, a
+```
+function solve_quadratic(a::Complex, b::Complex, c::Complex)
+    ...
+```
+that handle a quadratic with complex coefficients, then we say that the
+function `solve_quadratic` provides two *methods*.  In any given function 
+call, Julia will select the appropriate method based on the types of the
+actual arguments, that is, the real method is chosen if `a`, `b`, `c` are all
+`Real`, and the complex version is chosen if `a`, `b`, `c` are call `Complex`.
 
 ## For-Loop
 
@@ -196,7 +208,7 @@ In Julia, a *for-loop* has the form
 for k in <iterator>
     <statements>
 ```
-where `<iterator>` is an *iteratble container*.  For example, the loop
+where `<iterator>` is an *iterable container*.  For example, the loop
 ```
 for k in [1, 3, 5]
     print(k, ", ")
@@ -215,5 +227,23 @@ for k = 1:2:5
 end
 ```
     
+A for-loop is a scoping unit whereas an if-statement is not.  Thus, 
+```
+for i = 1:5
+    x = i
+end
+println("x = ", x)
+```
+will throw an `UndefVarError` because `x` is local to the for-loop, whereas
+```
+if true
+    x = 3
+end
+print("x = ", x)
+```
+will print `x = 3`.  The loop counter `i` is also a local variable, so
+its value is also not accessible outside the loop.
 
+However, a for-loop defines a *soft scope* in contrast to a function, 
+which defines a *hard scope*.
 
