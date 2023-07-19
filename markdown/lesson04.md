@@ -75,10 +75,6 @@ f(z)
 that the *residual*, that is, the value of `f` at the computed zero, is
 close to the machine epsilon.
 
-In this example, to solve our equation we had to write a (simple) function `f` 
-and pass it as an argument to another (much more complicated) function
-`find_zero`, written by experts.  
-
 ## Argument Passing
 
 A Julia function can have any number of arguments and any number of return
@@ -130,7 +126,7 @@ Returning to our first example of this lesson, type
 ```
 to see the help message for this function.  Notice that `find_zero` can actually
 take more than two arguments.  It has five *positional arguments* and several
-*keyword arguments*.  Only the first two arguments, the funtion and interval, 
+*keyword arguments*.  Only the first two arguments, the function and interval, 
 are required.  By doing
 ```
 z = find_zero(f, (0.5, 1.0), verbose=true)
@@ -184,11 +180,12 @@ include("solve_quadratic.jl")
 xp, xm = solve_quadratic(1, -5, 2)
 sqrt_dscr
 ```
-The call to `solve_quadratic` returns the zeros of `x^2-5x+2`, but attempting
-to see the value of the local variable `sqrt_dscr` outside the body of the
-function raises an `UndefVarError`.  Similarly, you cannot reference the
-local variables `x_plus` and `x_minus`, although their values are available
-from `xp` and `xm` since the function call effectively results in the
+The `include` statement just reads the lines from the file `solve_quadratic.jl`
+into the REPL.  The call to `solve_quadratic` returns the zeros of `x^2-5x+2`, 
+but attempting to see the value of the local variable `sqrt_dscr` outside the 
+body of the function raises an `UndefVarError`.  Similarly, you cannot 
+reference the local variables `x_plus` and `x_minus`, although their values are 
+available from `xp` and `xm` since the function call effectively results in the
 assignments `xp = x_plus` and `xm = x_minus`.  
 
 Limiting the scope of local variables in this way is necessary, because 
@@ -219,7 +216,51 @@ a = 7
 h2(x) = x^2 + a
 y = h2(3)
 ```
-the variable `y` gets assigned the value `16`.
+the variable `y` gets assigned the value `16`.  Note that changing the value
+of `a` will change the result of `h2`, so for example
+```
+a = 1
+w = h2(3)
+```
+assigns `w` the value `10`.  In fact, we could *define* a function
+```
+h3(x) = 2x - b
+```
+even if `b` is not defined, provided we assign `b` a value before we actually
+*call* `h3`.
+
+By the way, in the body of the function `solve_quadratic`, we could change
+the final line to read simply
+```
+    x_plus, x_minus
+```
+that is, we could omit the `return` keyword, because when there is no explicit
+return statement the function returns the value of the final line of its
+body.  Similarly, we could have defined `h1` as
+```
+function h1(x)
+    a = 3
+    x^2 + a
+end
+```
+
+## Anonymous Functions
+
+In our earlier example solving $\sin(4x)=\log(x)$, instead of first defining
+a function with the name `f`, we could have called `find_zero` as
+```
+z = find_zero(x -> sin(4x)-log(x), [0.5, 1.0])
+```
+Here, the first argument `x -> sin(4x)-log(x)` is an *anonymous function*,
+that is, a function without a name.  An equivalent alternative syntax is
+```
+z = find_zero([0.5,1.0]) do x
+    sin(4x) - log(x)
+end
+In such a *do-construct*, the lines between `do` and the matching `end`
+form the body of an anonymous function that is inserted as the first
+argument in the function call that precedes `do`.  By using a do-construct,
+we can pass an anonymous function 
 
 ## Dot Syntax
 
@@ -238,6 +279,53 @@ length `4`, then `w` will equal `[f(v[1]), f(v[2]), f(v[3]), f(v[4])]`.
 In general, we can make any scalar function operate elementwise on a vector 
 argument by inserting a dot before the parentheses in a function call.
 
+## Arguments that Mutate!
+
+Consider the following example.
+```
+function f(x)
+    x *= 2
+    return x^2
+end
+
+z = 3
+w = f(z)
+```
+Here, `w` is assigned the value `36` but the function call does not change
+`z`, which retains the value `3`.  That is, the statement
+`x *= 2` doubles the value of the dummy argument `x` but has no effect on 
+the actual argument `z`, because the function call is equivalent to
+```
+x = z
+x *= 2
+w = x^2
+```
+
+However, if an actual argument is a mutable container then it can be
+modified by a function call, as in the next example.
+```
+function f!(x)
+    x[1] *= 2
+    return sum(x)
+end
+ 
+z = [1, 2, 3]
+w = f!(z)
+```
+In this case, `w` is assigned the value `7` and the function call also
+changes `z` to have the value `[2, 2, 3]`.  Again, this outcome is
+consistent with the usual rules for assignment, since the function call
+is equivalent to
+```
+x = z
+x[1] *= 2
+w = sum(x)
+```
+and the statement `x = z` means that `x` references the same storage as `z`.
+It is a convention in Julia that if a function can mutate any one of its 
+arguments then the function name should finish with the exclamation 
+character `!` as a visual warning to anyone reading the code.
+
 * * *
 
 ## Summary
@@ -249,7 +337,8 @@ In this lesson, you have learned how
 * values are returned from a function;
 * to assign a default value to an argument;
 * the function body is a scoping unit for local variables;
-* the dot syntax is used to make a scalar function operate on a vector argument.
+* the dot syntax is used to make a scalar function operate on a vector argument;
+* a function name should end in `!` if a call might change one of its arguments.
 
 ## Further Reading
 
