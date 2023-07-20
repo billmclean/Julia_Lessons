@@ -1,2 +1,4 @@
 #!/usr/bin/env bash
-pandoc --standalone --mathml --toc --self-contained $1.md -o $1.html
+pandoc --standalone --mathml --toc --self-contained \
+  -M date:`date "+%Y-%m-%d"` $1.md -o $1.html
+

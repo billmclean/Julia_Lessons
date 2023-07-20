@@ -1,6 +1,5 @@
 ---
 title: Lesson 6\. Matrices
-date: 2023-07-14
 ---
 
 # Lesson 6. Matrices
@@ -329,3 +328,6 @@ The documentation for the
 describes many other functions that arise in matrix applications.  These
 functions are often designed to exploit any special structure that a matrix
 posesses, such as symmetry or positive-definiteness.
+
+[**Back to All Lessons**](../index.html)
+

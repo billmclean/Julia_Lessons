@@ -1,6 +1,5 @@
 ---
 title: Lesson 5\. Plotting
-date: 2023-07-13
 ---
 
 ## Lesson 5. Plotting
@@ -273,3 +272,5 @@ we will cover in a later lesson.  A variety of specialised plot types can
 be generated using the 
 [`StatsPlots`](https://docs.juliaplots.org/stable/generated/statsplots/)
 package.
+
+[**Back to All Lessons**](../index.html)

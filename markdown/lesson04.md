@@ -1,6 +1,5 @@
 ---
 title: Lesson 4\. Functions
-date: 2023-07-12
 ---
 
 # Lesson 4. Functions
@@ -344,3 +343,5 @@ In this lesson, you have learned how
 
 The section on [Functions](https://docs.julialang.org/en/v1/manual/functions/)
 in the Julia documentation discusses the above topics at greater depth.
+
+[**Back to All Lessons**](../index.html)

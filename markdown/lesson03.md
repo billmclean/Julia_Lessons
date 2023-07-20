@@ -1,6 +1,5 @@
 ---
 title: Lesson 3\. Vectors
-date: 2023-07-11
 ---
 
 # Lesson 3. Vectors
@@ -214,4 +213,6 @@ In this lesson, we have seen how to
 * construct vectors using functions such as `zeros` provided by Julia;
 * use concatenation to combine vectors;
 * assign a vector or a copy of a vector.
+
+[**Back to All Lessons**](../index.html)
 

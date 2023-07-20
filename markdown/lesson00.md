@@ -1,6 +1,5 @@
 ---
 title: Lesson 0\. Using Julia
-date: 2023-07-08
 ---
 
 # Lesson 0. Using Julia
@@ -195,3 +194,5 @@ these lessons.
 Similarly, the [VSCode website](https://code.visualstudio.com/) provides the
 [official documentation](https://code.visualstudio.com/docs) about using 
 this IDE.  
+
+[**Back to All Lessons**](../index.html)

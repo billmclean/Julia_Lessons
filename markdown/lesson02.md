@@ -1,6 +1,5 @@
 ---
 title: Lesson 2\. Names
-date: 2023-07-09
 ---
 
 > There are only two hard things in Computer Science: cache invalidation and
@@ -267,4 +266,7 @@ We have seen
 
 The Julia documentation has a section on 
 [Variables](https://docs.julialang.org/en/v1/manual/variables/), including
-some [Stylistic Conventions](https://docs.julialang.org/en/v1/manual/variables/).
+some 
+[Stylistic Conventions](https://docs.julialang.org/en/v1/manual/variables/).
+
+[**Back to All Lessons**](../index.html)

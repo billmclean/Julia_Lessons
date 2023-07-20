@@ -1,6 +1,5 @@
 ---
 title: Lesson 8\. Logic and Control
-date: 2023-07-18
 ---
 
 ## Lesson 8. Logic and Control
@@ -317,4 +316,17 @@ file.
 
 ## Summary
 
+In this lesson, we have seen how to
+
+* form logical expressions in Julia;
+* use an if-construct to test a condition and select one of several
+alternative code blocks;
+* use a for-loop to execute a code block multiple times with the loop 
+counter taking successive values in an iterable container.
+
 ## Further Reading
+
+The Julia documentation has a section on 
+[Control Flow](https://docs.julialang.org/en/v1/manual/control-flow/).
+
+[**Back to All Lessons**](../index.html)

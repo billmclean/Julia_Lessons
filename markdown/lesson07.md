@@ -1,6 +1,5 @@
 ---
 title: Lesson 7\. Strings
-date: 2023-07-16
 ---
 
 # Lesson 7. Strings
@@ -361,3 +360,6 @@ of strings and printed output;
 More details can be found in the section on 
 [strings](https://docs.julialang.org/en/v1/manual/strings/) in the Julia
 documentation.
+
+[**Back to All Lessons**](../index.html)
+

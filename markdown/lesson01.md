@@ -1,6 +1,5 @@
 ---
 title: Lesson 1\. Arithmetic
-date: 2023-07-08
 ---
 
 # Lesson 1. Arithmetic
@@ -327,3 +326,5 @@ The Julia documentation includes a section on
 A classic paper is David Golberg, [*What every computer scientist should
 know about floating-point arithmetic*](https://doi.org/10.1145/103162.103163),
 ACM Computing Surveys, Volume 23, pp 5-48, 1991.
+
+[**Back to All Lessons**](../index.html)
