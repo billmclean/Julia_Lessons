@@ -16,7 +16,7 @@ lessons.
 
 In this lesson, you will learn to evaluate arithmetic expressions in Julia
 and to understand the output, particularly when scientific notation, 
-complex numbers and inifinite or undefined answers are involved.
+complex numbers and infinite or undefined answers are involved.
 
 After completing the lesson, you should know
 
@@ -29,7 +29,7 @@ After completing the lesson, you should know
 * the meaning of `Inf` (infinity) and `NaN` (not-a-number).
 
 Although Julia's arithmetic is reasonably intuitive, certain intrinsic
-limitations of digital computer lead to some subtleties that can be
+limitations of digital computers lead to some subtleties that can be
 confusing at first.  Consequently, this lesson is quite long.
 
 * * *
@@ -86,7 +86,7 @@ the Julia REPL to check if you are correct.
 ```
 In the last two expressions, the minus sign is interpreted as a *unary* rather
 than a *binary* operator.  The unary minus has a higher precedence than `*`
-and `**` so the results are `2*(-3)` and `2^(-3)`.
+and `^` so the results are `2*(-3)` and `2^(-3)`.
 
 In practice, if you are unsure about how Julia will evaluate an expression,
 it is best to use explicit parentheses.  Doing so will make your code
@@ -94,7 +94,10 @@ easier to read.
 
 **Exercise.** Type a command to evaluate the fraction with numerator `17.1+20.3`
 and denominator `36.5+41.8`.  Hint: the answer is **not**
-`17.1 + 20.3/36.5 + 41.8`.
+```
+17.1 + 20.3/36.5 + 41.8
+```
+
 
 ## Julia's Type System
 
@@ -107,7 +110,7 @@ returns the value `Int64`, whereas
 ```
 typeof(3.0)
 ```
-return the value `Float64`.  On any 64-bit system, these are the default 
+returns the value `Float64`.  On any 64-bit system, these are the default 
 integer and floating-point data types that the arithmetic registers in the 
 CPU operate upon.  Julia has a rich hierarchy of types.  The most general
 type is `Any`, which forms the root of the tree of types, that is, every 
@@ -126,14 +129,14 @@ type hierarchy.
 
 ## Integers
 
-As the name suggest, an `Int64` is stored using 64~bits, or equivalently,
-using 8~bytes.  The `typemax` and `typemin` functions give the largest and
-smallest numbers that can be stored in a given data type.  The commands
+As the name suggests, an `Int64` is stored using 64 bits, or equivalently,
+using 8 bytes.  The `typemax` and `typemin` functions give the largest and
+smallest numbers that can be stored in a given data type, with
 ```
 typemax(Int64)
 typemin(Int64)
 ```
-show that the largest and smallest `Int64` numbers are
+showing that the largest and smallest `Int64` numbers are
 $$
 9223372036854775807=\sum_{k=0}^{62}2^k=2^{63}-1
 $$
@@ -155,7 +158,7 @@ the result of
 ```
 typemax(Int64) + 1
 ```
-is the negative number `typemin(Int64)`. 
+is the *negative* number `typemin(Int64)`. 
 
 ## Floating-point Numbers
 
@@ -172,7 +175,7 @@ $1\le m<10$ and $e$ is an integer.  The number $m$ is called the
 
 We can use *exponential format*, also called *scientific format*,
 when entering or displaying floating-point numbers.  For example,
-Julie will display $2.3\times10^{17}$ as `2.3e17`, and display 
+Julia will display $2.3\times10^{17}$ as `2.3e17`, and display 
 $7.5\times10^{-8}$ as `7.5e-8`.  This format is useful whenever you
 have to deal with very large or very small numbers.
 
@@ -182,8 +185,8 @@ binary, so the actual floating-point representation is $m\times2^e$
 with $1\le m<2$.  A standard known as 
 [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754) defines the binary
 format for 64-bit floating-point numbers: first is the sign bit ($0$
-for positive and $1$ for negative), next are the 11 bits for storing
-the exponent, and finally the 52 bits for storing the mantissa. A
+for positive and $1$ for negative), next are 11 bits for storing
+the exponent $e$, and finally 52 bits for storing the mantissa $m$. A
 *machine number* is one that can be represented exactly in this format.
 
 The function `floatmax` and `floatmin` return the largest and smallest 
@@ -212,14 +215,14 @@ decimal figures*.
 ## Inf and NaN
 
 The function call `typemax(Float64)` returns `Inf`, a special value that
-represents 'infinity'.  Likewise, `typemain(Float64)` returns `-Inf`.  
+represents 'infinity'.  Likewise, `typemin(Float64)` returns `-Inf`.  
 Julia evaluates the expression
 ```
 1.0/0.0
 ```
 as `Inf`, and similarly evaluates `-1.0/0.0` as `-Inf`.  More interesting
-perhaps, is that expressions involving `Inf` can yield a finite results.
-For example, try the following.
+perhaps, is that expressions involving `Inf` can yield finite results.
+For example, try the following in the REPL.
 ```
 atan(Inf)
 tahn(-Inf)
@@ -257,12 +260,12 @@ For example,
 ```
 div(7, 2)
 ```
-returns `3`.  The `divrem` function return both the quotient and remainder;
+returns `3`.  The `divrem` function returns both the quotient and remainder;
 thus,
 ```
 q, r = divrem(7, 2)
 ```
-give `q=3` and `r=1`.
+gives `q=3` and `r=1`.
 
 ## Rational Numbers
 
@@ -271,7 +274,7 @@ The `//` operator is used to construct `Rational` numbers.  Doing
 x = 3//4
 ```
 creates a number `x` of type `Rational{Int64}`, which is really just a
-pair of integers, the numerator and denominator, that can be accessed as
+pair of integers, the numerator and denominator, that can be referenced as
 `x.num` and `x.den`, respectively.  Julia automatically cancels any 
 common factors, so for instance after doing
 ```
@@ -290,8 +293,9 @@ Just as a `Rational` number consists of a numerator and denominator, a
 ```
 z = 3.2 - 7.2im
 ```
-then the real part `z.re` is `3.2`, and the imaginary part `z.im` is
-`-7.2`.  You could also construct `z` using the `complex` function:
+then the real part, referenced as `z.re`, is `3.2`, and the imaginary part, 
+referenced as `z.im`, is `-7.2`.  You could also construct `z` using the 
+`complex` function:
 ```
 z = complex(3.2, 7.2)
 ```
@@ -311,8 +315,8 @@ In this lesson, you have learned about
 
 * the syntax and order of precedence of arithmetic operators;
 * the differences between integer and floating-point numbers;
-* the special floating-point numbers `Inf` and `NaN`;
 * exponential format, useful for very large or very small numbers;
+* the special floating-point numbers `Inf` and `NaN`;
 * why the accuracy of floating-point numbers is generally limited to
 about 15 significant (decimal) figures;
 * how to construct rational and complex numbers.

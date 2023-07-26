@@ -21,12 +21,14 @@ should know how to
 * incorporates axis labels, a title, a grid and a legend;
 * create some more specialised plots such a polar plots and histograms.
 
+A later lesson will cover more advanced plotting techniques.
+
 * * *
 
 ## The `plot` Command
 
 Start VSCode, do Ctrl+Shift+P to access the Command Palette and type
-`Julia: Start REPL`.  At the `julia>` prompt, type
+`Start REPL`.  At the `julia>` prompt, type
 ```
 using Plots
 ```
@@ -60,7 +62,10 @@ to `sin(x[k])` for all `k`.
 
 The `plot` command simply draws straight line segments between consecutive
 points `(x[k], y[k])`, but by choosing sufficiently many points the resulting
-polygonal arc looks like a smooth cure to the naked eye.
+polygonal arc looks like a smooth cure to the naked eye.  Keep in mind that
+your computer's display has a limited resolution: using more x-values
+will produce a smoother graph, but there is no benefit in having
+more x-values than the number of pixels across the width of the plot window.
 
 **Exercise.** Plot $y=\sin(x)$ again, but this time use only $11$ points
 instead of $201$.
@@ -117,11 +122,10 @@ plot(x, y,
      xlabel="x", ylabel="y", 
      title="The Graph of y = sin(x)",
      legend=false)
-savefig("annotated_plot.png")
 ```
 Running this program produces the plot shown below.
 
-![Annotated plot](../resources/annotated_plot.png)
+![Plot annotations](../resources/annotated_plot.png)
 
 We see effect of the keyword arguments `xlabel`, `ylabel`, `title` and `legend` 
 on the output of the `plot` function.  The code would work if you omitted
@@ -171,17 +175,17 @@ series on different pairs of axes.  Type the following lines into a file
 using Plots
 x1 = range(-4, 4, length=201)
 y1 = exp.(-x1.^2)
-p1 = plot(x1, y1, subplot=1, legend=false)
+p1 = plot(x1, y1, legend=false)
 x2 = range(0, 10, length=201)
-y2 = log.(x) .* sinpi.(x)
-p2 = plot(x2, y2, subplot=2, legend=false)
-plot(p1, p2, layout=(2, 1))
-savefig("my_subplots.png")
+y2 = log.(x2) .* sinpi.(x2)
+p2 = plot(x2, y2, legend=false)
+plot(p1, p2, layout=(2, 1), size=(750,500))
 ```
-Here, we create to `Plot` objects `p1` and `p2`, and then plot them
+Here, we create two `Plot` objects `p1` and `p2`, and then plot them
 using the `plot` command with the `layout` keyword argument.  In this case,
 the `(2,1)` layout means that the subplots appear in a $2\times1$ grid,
-as shown below.
+as shown below.  Also, we used the `size` keyword to increase the size of 
+the plot by 25% from the default of $600\times400$ to $750\times500$.
 
 ![Subplots](../resources/my_subplots.png)
 
@@ -197,7 +201,7 @@ plot(x, y, legend=false,
 ```
 produces
 
-![](../resources/xticks_example.png)
+![Adjusting ticks marks and labels](../resources/xticks_example.png)
 
 Manual adjustment of axis limits is also possible, using the `xlims` and
 `ylims` keywords.  Consider
@@ -210,7 +214,7 @@ plot(p1, p2, layout=(1, 2))
 ```
 which produces
 
-![](../resources/ylims_example.png)
+![Adjusting the limits on the y-axis](../resources/ylims_example.png)
 
 ## Polar Plots and Histograms
 
@@ -226,7 +230,7 @@ plot(θ, r, projections=:polar, legend=false)
 ```
 The output looks like
 
-![Polar plot](../resources/polar_example.png)
+![A polar plot](../resources/polar_example.png)
 
 A histogram is often useful when investigating statistical data.  For
 example, suppose we take 1,000 random numbers from a standard normal 
@@ -246,7 +250,7 @@ plot!(normal_pdf, label="Std Normal PDF", linewidth=2)
 ```
 produce the following output.
 
-![Histogram](../resources/histogram_example.png)
+![A histogram](../resources/histogram_example.png)
 
 * * *
 
@@ -258,10 +262,11 @@ In this lesson, we saw how to
 chosen interval;
 * use the `plot` command to display a curve;
 * use the `scatter` command to display discrete data values;
-* modify the line style and colour of plot;
-* annote the plot with axis labels and a title;
-* draw multiple plot curves in the same or in different subplots;
+* modify the line style and colour of a plot;
+* annotate a plot with axis labels and a title;
+* draw multiple plot curves on the same axes;
 * save a plot to a file;
+* draw multiple subplots in the plot window;
 * draw polar plots and histograms.
 
 ## Further Reading
