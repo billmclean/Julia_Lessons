@@ -21,7 +21,6 @@ Julia programs.  By the end of this lesson, you should be able to
 development environment (IDE);
 * run simple commands from the Julia prompt;
 * access help and documentation about Julia;
-* start (and quit from) the VSCode integrated development environment;
 * run a simple Julia program;
 * open or create a Julia source file in VSCode.
 
@@ -66,7 +65,7 @@ terminal running *Bash*, the default Unix shell.  At the $ prompt, type
 `julia` and press Enter.  You should see something similar to the image 
 below.
 
-![REPL.png](../resources/REPL.png)
+![The Julia REPL](../resources/REPL.png)
 
 If you installed Julia on Windows, then you should be able to find a graphical 
 launcher that opens the Julia REPL in a command window.  On MacOS, you should 
@@ -112,48 +111,43 @@ functions.  Look up the help messages for some of them.
 
 ## Quitting from the REPL
 
-You can quit the REPL by typing Ctrl-D as the first character following the
+You can quit the REPL by typing Ctrl+D as the first character following the
 `julia>` or `help>` prompts.
 
 ## VSCode
 
-VSCode is an *Integraged Development Environment* or *IDE* that supports 
+VSCode is an *Integrated Development Environment*, or *IDE*, that supports 
 the use of *extensions* for a wide variety of programming languages 
 including Julia.  On the lab PCs you can start VSCode with the Julia 
-extension installed by typing
-
-```
-code-julia 
-```
-
-in a Bash terminal.  To use VSCode on your own computer, download the 
-installer from https://code.visualstudio.com/download.  After installing 
-VSCode you should be able to find a launcher with the following logo.
+extension installed by typing `code` in a Bash terminal window or by 
+clicking on the graphical launcher: look for the logo
 
 ![VSCode logo](../resources/vscode.png){width=20%}
 
-When you start VSCode via the launcher, a window should open that looks 
+To use VSCode on your own computer, download the 
+[installer](https://code.visualstudio.com/download).  When you start VSCode,
+either from a terminal or via the launcher, a window should open that looks 
 something like the screenshot below.
 
-![VSCode-welcome.png](../resources/VSCode-welcome.png)
+![VSCode window](../resources/VSCode-welcome.png)
 
-(On Linux you can start VSCode from the Bash terminal by typing `code`.)
-To install the Julia extension for VSCode, follow 
+To install and acitvate the Julia extension for VSCode, follow 
 [these instructions](https://code.visualstudio.com/docs/languages/julia).
 
-Open the VSCode *command palette* by typing Ctrl+Shift+P or by selecting 
-this option from the View menu.  In the text box, type `start REPL`.  On 
-the bottom bar of the VSCode window you should see "Julia env:v1.9" and
-"Julia: Starting Language Server", and soon one of the panes should display 
-the `julia>` prompt.  VSCode will start downloading some cache files, but 
-you can start using the REPL immediately.
+Once the Julia extension is active, open the VSCode *command palette* by 
+typing Ctrl+Shift+P or by selecting this option from the View menu.  In 
+the text box, type `start REPL`.  On the bottom bar of the VSCode window,
+you should see "Julia env:v1.9" and "Julia: Starting Language Server". Soon, 
+one of the panes should display the `julia>` prompt.  VSCode will start 
+downloading some cache files, but you can start using the REPL immediately.
 
 ## Running .jl Files
 
 Download the file [`fibonacci.jl`](../downloads/fibonacci.jl) and save it to a 
 convenient folder.  In VSCode, click on the Explorer icon (the top one in 
 the left bar) or type Ctrl+Shift+E, and then click on the blue "Open Folder" 
-button and navigate to the folder containing `fibonacci.jl`.  A popup will ask 
+button and navigate to the folder containing `fibonacci.jl`.  Alternatively,
+select the "Open Folder ..." option from the File menu. A popup will ask 
 "Do you trust the authors of the files in this folder?".  Click on 
 "Yes, I trust the authors".
 
@@ -166,9 +160,11 @@ below.
 Hover your mouse over the triangle in the top right of the editor pane (the 
 one shaped like a Play button).  The pop-up text should read 
 "Julia: execute active File in REPL".  Click on the triangle.  You should 
-see VSCode open a Julia REPL in a new pane, and display the output as follows.
+see the output below appear in the REPL pane.
 
 ![](../resources/fibonacci_output.png)
+
+When you are finished, close VSCode by selecting "Exit" from the File menu.
 
 ## Summary
 
@@ -176,10 +172,11 @@ In this lesson you have seen how to
 
 * start and close the Julia REPL;
 * execute simple commands at the `julia>` prompt;
-* us the up- and down-arrow keys to go back and forth in the command history;
-* open a file in a VSCode editor pane;
-* execute code from a Julia source file;
+* use the up- and down-arrow keys to go forwards and backwards in the 
+command history;
 * display a help message about a Julia object;
+* open a file in a VSCode editor pane;
+* execute code from a Julia source file.
 
 * * *
 
