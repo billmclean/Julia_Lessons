@@ -6,7 +6,7 @@ title: Lesson 6\. Matrices
 
 ## Numerical Linear Algebra
 
-Many scientific and statistical application give rise to large-scale 
+Many scientific and statistical applications give rise to large-scale 
 problems in linear algebra which are amenable to numerical solution
 thanks to modern computer hardware and software.  For instance, an
 average desktop computer can solves a $5,000\times5,000$ linear system
@@ -53,16 +53,16 @@ We will see that many of the functions we met in the lesson on vectors can
 also be used to handle matrices.  The `length` function returns the number
 of elements in a matrix, so in our example `length(A)` will return `12`.
 Perhaps more useful is `size(A)`, which returns a tuple consisting of the 
-numbers of rows and columns; in our case, `(4, 3)`.  Also, `size(A, 1)`
+numbers of rows and columns; in our case, `(3, 4)`.  Also, `size(A, 1)`
 returns the number of rows, and `size(A, 2)` the number of columns.
 
 Here are some other functions.
 
-* `zeros(m, n)` or `zeros((m, n))` create an $m\times n$ matrix with every
+* `zeros(m, n)` or `zeros((m, n))` creates an $m\times n$ matrix with every
 element equal to `0.0`;
-* `ones(m, n)` or `ones((m, n))` create an $m\times n$ matrix with every
+* `ones(m, n)` or `ones((m, n))` creates an $m\times n$ matrix with every
 element equal to `1.0`;
-* `fill(x, m, n)` or `fill(x, (m, n)) creates an $m\times n$ matrix with
+* `fill(x, m, n)` or `fill(x, (m, n))` creates an $m\times n$ matrix with
 every element equal to `x`;
 * `rand(m, n)` creates an $m\times n$ matrix of (pseudo-)random numbers,
 uniformly distributed in interval `[0,1]`;
@@ -86,7 +86,8 @@ Notice that because the elements of `B` are `Float64` numbers, Julia has
 converted the `Int64` elements of `A`, since all elements of a matrix must
 share a common type.
 
-**Exercise.** How would you construct the matrix
+**Exercise.** How would you make use of `A` and the function `ones` to
+construct the matrix $\textbf{D}$ below?
 $$
 \textbf{D}=\begin{bmatrix}
  2& 0&-7& 1\\
@@ -94,7 +95,7 @@ $$
  4& 1& 0&-6\\
  1& 1& 1& 1\\
  1& 1& 1& 1\\
- 1& 1& 1& 1\end{bmatrix}?
+ 1& 1& 1& 1\end{bmatrix}.
 $$
 
 Julia treats the `Vector` type as a *column vector*, with both
@@ -123,15 +124,16 @@ E = [ 9   2   5   0  -4
       6  -3  -4   1   1 ]
 ```
 then `E[3,4]` equals `2`, and `E[2,5]` equals `8`.  We can also extract a
-sub-matrix using index ranges.  Thus, typing `E[2:4,3:4]` gives
+sub-matrix using index ranges.  Thus, typing `E[2:4,3:4]` produces the
+following output.
 ```
 3×2 Matrix{Int64}:
   1  -3
  -6   2
  -4   1
 ```
-In particular, `E[:,j]` returns the `j`th column of `E`, and
-`E[i,:]` returns the `i`th row of `E`.  Note that both have the same type
+Also, `E[:,j]` references the `j`th column of `E`, and
+`E[i,:]` references the `i`th row of `E`.  Note that both have the same type
 `Vector{Int64}`, even though mathematically one is a column vector and the
 other a row vector.
 
@@ -150,15 +152,12 @@ creates the following matrix `H`.
 ```
 
 The `reshape` function changes the dimensions of a matrix or vector. For
-example, if we define the vector
+example, the commands
 ```
 v = collect(1:12)
-```
-of length 12, then
-```
 A = reshape(v, 3, 4)
 ```
-then `A` is
+create a matrix `A` displayed as follows.
 ```
 3×4 Matrix{Int64}:
  1  4  7  10
@@ -174,9 +173,9 @@ with `A[k]` equal to `v[k]` for all `k`.
 **Exercise.** Construct `v` and `A` as above.  Try changing `v[4]` to `-4`
 and verify that `A[1,2]` also changes to `-4`.
 
-This example also shows that Julia stores the entries of a matrix in
-*column-major order*, that is, Julia stores the first column, followed by
-the second column, and so on.  
+This example also illustrates the fact that Julia stores the entries of a 
+matrix in *column-major order*, that is, in the computer memory, Julia 
+stores the first column, followed by the second column, and so on.  
 
 ## Matrix Arithmetic
 
@@ -198,7 +197,7 @@ $$
 If the inner dimensions do not agree, that is, if the number of columns of `A`
 differs from the number of rows of `B`, then `A * B` is not defined and
 Julia will throw a `DimensionMismatch` error.  A vector is treated like
-a with one column, so the matrix-vector product `A * v` will be defined
+a matrix with one column, so the matrix-vector product `A * v` will be defined
 if and only if `size(A, 2)` equals `length(v)`.
 
 If `size(A)` equals `size(B)` then `C = A .* B` assigns `C` the 
@@ -234,7 +233,7 @@ b = [17, -11, 43]
 x = A \ b
 ```
 then `x` holds the solution vector `[2.0, -3.0, 5.0]`.  The 
-*backslash operator* '\' performs a *left division*, that is, `A \ b`
+*backslash operator* `\` performs a *left division*, that is, `A \ b`
 evaluates $\mathbf{A}^{-1}\mathbf{b}$.  The inverse matrix $\mathbf{A}^{-1}$
 is not computed explicitly; instead a more computationally efficient 
 algorithm is used, based on an *LU factorisation* of $A$.  
@@ -284,7 +283,7 @@ Given a matrix `A`, the assignment
 ```
 B = A
 ```
-creates a matrix `B` that with the same size and sharing the same storage 
+creates a matrix `B` with the same size and sharing the same storage 
 as `A`.  If we instead do
 ```
 C = copy(A)
@@ -305,7 +304,7 @@ contents of that storage.  If we now do
 D .= A
 ```
 then the contents of `A` are copied to `D`.  Since `A` and `D` do not
-share storage, changes to one have no effect on the other.
+share storage, changes to one do not affect on the other.
 
 * * *
 
@@ -313,8 +312,9 @@ share storage, changes to one have no effect on the other.
 
 This lesson taught you how to
 
-* create an array by listing its elements between square brackets;
-* use `zeros`, `ones`, `fill`, `rand` and `randn` to create matrix;
+* create a matrix by listing its elements between square brackets;
+* create a matrix using any of the functions `zeros`, `ones`, `fill`, `rand` 
+and `randn`;
 * reference a matrix element using its row and column indices;
 * reference a row or column of a matrix;
 * perform common arithmetic operations on matrices;
@@ -325,9 +325,9 @@ This lesson taught you how to
 
 The documentation for the 
 [`LinearAlgebra`](https://docs.julialang.org/en/v1/stdlib/LinearAlgebra/)
-describes many other functions that arise in matrix applications.  These
-functions are often designed to exploit any special structure that a matrix
-posesses, such as symmetry or positive-definiteness.
+module describes many other functions that arise in matrix applications. 
+These functions are often designed to exploit any special structure that a 
+matrix posesses, such as symmetry or positive-definiteness.
 
 [**Back to All Lessons**](../index.html)
 

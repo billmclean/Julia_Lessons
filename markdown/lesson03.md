@@ -6,7 +6,7 @@ title: Lesson 3\. Vectors
 
 ## Objectives
 
-Any programming language that deals with mathematical problems mush provide
+Any programming language that deals with mathematical problems must provide
 a convenient and efficient way to store and manipulate vector data. In this
 lesson you will learn about Julia's `Vector` type.  In particular, you will
 learn how to
@@ -31,18 +31,17 @@ a = [2, -1, 9, 7]
 In this case, `typeof(a)` will return `Vector{Int64}` since each element of
 `a` is an integer.  
 
-In Julia, array indices start at `1`, and elements are referenced using 
-square brackets: `v[1]` is the first element, `v[2]` is the
-second element, and so on.  The `length` function returns the number of 
-elements in a vector.  Julia throws a `BoundsError` if you attempt to 
-reference `v[i]` for an index `i` outside the range from `1` to `length(v)`.
+In general, the first element of a vector `v` is referenced as `v[1]`, the
+second element as `v[2]`, and so on.  The `length` function returns the 
+number of elements in a vector.  Julia throws a `BoundsError` if you attempt 
+to reference `v[i]` for an index `i` outside the range from `1` to `length(v)`.
 The last element in a vector `v` can be referenced as
 ```
 v[end]
 ```
 that is, `v[end]` equals `v[n]` if `n = length(v)`.
 
-For the vector `a` defined above, `a[1]` equals `2`, `a[2]` equals `-1`,
+Thus, for the vector `a` defined above, `a[1]` equals `2`, `a[2]` equals `-1`,
 `a[3]` equals `9` and finally `a[4]` equals `7`.  Also, `length(a)` equals `4`.
 
 Suppose that the vector `v` has length `n`.  If `i` and `j` satisfy
@@ -106,7 +105,7 @@ For `c` and `d` as above,
 c .* d = [0, -5, 27]
 d .+ 4 = [4, 9, 13]
 ```
-Similarly, `d ./ c` equals `[0.0, -5.0, 3.0]` and `d .- 3` equals `[1, 6, 10]`.
+Similarly, `d ./ c` equals `[0.0, -5.0, 3.0]` and `d .- 3` equals `[-3, 2, 6]`.
 
 ## Handy Functions for Creating Arrays
 
@@ -125,7 +124,7 @@ For example,
 ```
 [ k^2-1 for k = -1:4 ]
 ```
-creates the vector `[0, -1, 1, 3, 8, 15]`.  You can create this vector with
+creates the vector `[0, -1, 0, 3, 8, 15]`.  You can create this vector with
 floating-point entries instead of integers by doing
 ```
 Float64[ k^2-1 for k = -1:4 ]
@@ -166,7 +165,7 @@ that any change to `y` also affects `x`.  For example,
 y[4] = 1
 ```
 changes both `x` and `y` to become `[3, -6, 7, 1, 2]`.  If you do not 
-want this behavious, then you must define `y` to be *copy* of `x`.  One
+want this behavious, then you must define `y` to be a *copy* of `x`.  One
 way is to use the `copy` function,
 ```
 y = copy(x)
@@ -190,9 +189,9 @@ way as for vectors: `t[1]` equals `2`, `t[2]` equals `-1`, `t[3]` equals `9`
 and `t[4]` equals `7`.  
 
 However, unlike a vector, a tuple is *immutable*.  Thus, although an
-assignment like `a = t[3]` is perfectly fine, attempting to do something
-like `t[3] = 5` will throw an error.  The only way to change `t[3]` is to
-create a new tuple and assign it to `t`:
+assignment like `a = t[3]` is perfectly fine, attempting to do 
+like `t[3] = 5` will throw a `MethodError`.  The only way to change `t[3]` 
+is to create a new tuple and assign it to `t`:
 ```
 t = (2, -1, 5, 7)
 ```

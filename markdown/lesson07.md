@@ -43,7 +43,7 @@ n = codepoint('G')
 ```
 assigns to `n` the code point for an upper-case letter 'G', which turns out 
 to be `0x00000047`.  Here, `n` is an *unsigned 32-bit integer*, or `UInt32`,
-and the eigth digits following the `0x` given the hexadecimal representation
+and the eight digits following the `0x` give the hexadecimal representation
 of `n`.  Thus, `n` has the decimal value $4\times16+7=71$, as you can
 verify by typing `Int64(n)`.  Conversely, doing
 ```
@@ -83,7 +83,7 @@ Here is a second line.
 ```
 The `println` takes a string and appends a `\n` before printing.  The
 difference between `print` and `println` is not immediately apparent
-in the REPL, but is obvious when running a `.jl` file.
+in the REPL, but is obvious when printing from a `.jl` file.
 
 You can *prevent* jumping to a new line by finishing a line with a
 backslash `\`.  Thus,
@@ -133,11 +133,11 @@ if
 s = "The Website of Dreadful Night"
 ```
 then `s[1]` equal `'T'`, `s[5]` equals `'W'` and `s[end]` equals `'t'`.
-Similarly, we can easily extract a *substring*: `s[5:11]` equals `"Website"`.
-Note that `s[16]` is the character `'D'`, whereas `s[16:16]` is the 
-string `"D"`.
+Similarly, we can easily extract a *substring*; for example, `s[5:11]` 
+equals `"Website"`.  Note that `s[16]` is the character `'D'`, whereas 
+`s[16:16]` is the string `"D"`.
 
-Like a tuples, a string is immutable.  If you try to do
+Like a tuple, a string is immutable.  If you try to do
 ```
 s[25] = 'L'
 ```
@@ -196,7 +196,7 @@ The `lowercase` and `uppercase` functions convert every character in a
 string to lower and upper case, respectively.
 ```
 s3 = "Mona Lisa Overdrive"
-print(lowercase(s))
+print(lowercase(s3))
 ```
 produces
 ```
@@ -205,7 +205,7 @@ mona lisa overdrive
 whereas
 ```
 s4 = "Virtual Light"
-print(uppercase(s))
+print(uppercase(s4))
 ```
 produces
 ```
@@ -241,15 +241,14 @@ xp, xm = solve_quadratic(1, -5, 2)
 ```
 where `xp` and `xm` are the zeros of the quadratic `x^2-5x+2`.  If we do
 ```
-s = "The zeros are $xp and $xm."
-println(s)
+println("The zeros are $xp and $xm.")
 ```
 then we obtain the output
 ```
 The zeros are 4.561552812808831 and 0.4384471871911697.
 ```
-This process is called *string interpolataion*: the characters `$xp` and
-`$xm` are replaced by the values of the variables `xp` and `xm`.
+This process is called *string interpolataion*: the character sequences
+`$xp` and `$xm` are replaced by the values of the variables `xp` and `xm`.
 
 We can gain fine control over how the value of a variable is formatted by
 using the macro `@sprintf` from the `Printf` module.  For example, if
@@ -310,9 +309,9 @@ on the next line.
 
 ## Docstrings
 
-A *docstring* describes the purpose and any other information about a
-function.  Recalling our `solve_quadratic` function from Lesson 4, we could
-do the following.
+A *docstring* describes the purpose and key information about a function.  
+Recalling our `solve_quadratic` function from Lesson 4, we could do the 
+following.
 ```
 """
     solve_quadratic(a, b, c)
@@ -331,7 +330,7 @@ end
 ```
 
 If we type `solve_quadratic` at the `help>` prompt (in other words, at the
-`julia>` prompt type `?` followed by `solve_quadratic`), the Julia will
+`julia>` prompt type `?` followed by `solve_quadratic`), then Julia will
 print the docstring.  Try it.  Notice that we indent the first line of
 the docstring 4 spaces, and put backticks around any mathematical expressions.
 
@@ -346,7 +345,7 @@ This lesson described how
 * the newline and backslash characters can force or inhibit a line break;
 * a triple quoted string can preserve the line breaks in a long string
 extending over several lines;
-* indexing works for strings, and the complications associated with some
+* indexing works for strings, and the complications associated with 
 non-ASCII characters;
 * strings can be concatenated or repeated;
 * string interpolation makes it easy to insert the value of a variable into
@@ -358,7 +357,7 @@ of strings and printed output;
 ## Further Reading
 
 More details can be found in the section on 
-[strings](https://docs.julialang.org/en/v1/manual/strings/) in the Julia
+[Strings](https://docs.julialang.org/en/v1/manual/strings/) in the Julia
 documentation.
 
 [**Back to All Lessons**](../index.html)

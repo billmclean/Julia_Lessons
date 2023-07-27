@@ -18,7 +18,8 @@ By the end of this lesson, you should know
 * how arguments are passed to a function;
 * how values are returned from a function;
 * how to access a function defined in a source file;
-* the meaning of *scope* as it applies to the variables in a function body.
+* the meaning of *scope* as it applies to the variables in a function body;
+* a simple example of a *macro*.
 
 * * *
 
@@ -31,7 +32,7 @@ $$
 f(x)=\sin(4x)-\log(x).
 $$
 Start VSCode, do Ctrl+Shift+P to open the Command Palette and there type
-`Julia: Start REPL`.  At the `julia>` prompt, type
+`Start REPL`.  At the `julia>` prompt, type
 ```
 f(x) = sin(4x) - log(x)
 f(0.5)
@@ -116,7 +117,7 @@ g(y, x)
 ```
 and the result would be the same as typing `g(1, 3)`.  In practice, to avoid 
 confusion, we most often use the same names for actual arguments as those
-used for the dummy arguments except when the latter are literal constants
+used for the dummy arguments, except when the former are literal constants
 like `1` and `3`.
 
 Returning to our first example of this lesson, type
@@ -139,7 +140,7 @@ then the more efficient `Order2()` algorithm uses only 5 iterations
 requiring 9 evaluations of `f`.
 
 It is also possible to provide a *default value* for a dummy argument.  This
-default value is used if the corresponding actual argument is omitted from
+default value is used when the corresponding actual argument is omitted from
 a function call.  For example, consider the function
 ```
 normal_distribution(x, μ=0.0, σ=1.0) = exp(-((x-μ)/σ)^2/2) / (σ*sqrt(2π))
@@ -203,16 +204,24 @@ x = 2
 y = h1(x)
 ```
 then following the call to `h1` the value of `a` is still `7` and not `3`.
+The `a` with the value `7` is a *global* variable, whereas the `a` with the
+value `3` is a *local* variable (with respect to `h1`).
 Imagine that `h1` was a long, complicated function and we did not notice
-(probably because we did not even look at the source code) that there was
-a line `a = 3`.  We would get a surprise if the value of our variable `a` 
-mysteriously changed from `7` to `3` after calling `h1`.
+that the body included a line `a = 3`.  We would get a surprise if the value 
+of our (global) variable `a` mysteriously changed from `7` to `3` after 
+calling `h1`.  To prevent such unwanted surprises, assigning to a variable, 
+other than a dummy argument, in the body of a function always creates a new 
+local variable, regardless of whether or not a global variable with the same
+name exists.
 
-However, the scoping rules do allow a function body access to variables
-defined in an enclosing scoping unit.  Thus, in the following example
+However, the scoping rules *do* allow a function body to *read* the value
+of a global variable.  Thus, in the following example,
 ```
 a = 7
-h2(x) = x^2 + a
+function h2(x)
+    y = x^2 + a
+    return y
+end
 y = h2(3)
 ```
 the variable `y` gets assigned the value `16`.  Note that changing the value
@@ -251,15 +260,17 @@ a function with the name `f`, we could have called `find_zero` as
 z = find_zero(x -> sin(4x)-log(x), [0.5, 1.0])
 ```
 Here, the first argument `x -> sin(4x)-log(x)` is an *anonymous function*,
-that is, a function without a name.  An equivalent alternative syntax is
+that is, a function that has no name.  An equivalent alternative syntax is
 ```
 z = find_zero([0.5,1.0]) do x
     sin(4x) - log(x)
 end
+```
 In such a *do-construct*, the lines between `do` and the matching `end`
 form the body of an anonymous function that is inserted as the first
 argument in the function call that precedes `do`.  By using a do-construct,
-we can pass an anonymous function 
+we can conveniently pass an anonymous function whose body might require 
+several lines of code.
 
 ## Dot Syntax
 
@@ -325,6 +336,25 @@ It is a convention in Julia that if a function can mutate any one of its
 arguments then the function name should finish with the exclamation 
 character `!` as a visual warning to anyone reading the code.
 
+# Macros
+
+A *macro* is a rule or pattern for transforming a tuple of arguments to a
+returned expression that Julia evaluates.  In Julia, the name of every
+macro begins with the `@` character.  The creation of macros is beyond the
+scope of there lessons, but many useful macros are provided by Julia and
+its standard library.  A simple example is `@show`, that is handy for
+showing the value of a variable in a `.jl` file.  If we execute a file
+containing the statements
+```
+escape_velocity = 11.2
+@show escape_velocity
+```
+then the `@show` macro causes Julia to print the output
+```
+escape_velocity = 11.2
+```
+We will meet some other macros in a later lesson.
+
 * * *
 
 ## Summary
@@ -337,7 +367,8 @@ In this lesson, you have learned how
 * to assign a default value to an argument;
 * the function body is a scoping unit for local variables;
 * the dot syntax is used to make a scalar function operate on a vector argument;
-* a function name should end in `!` if a call might change one of its arguments.
+* a function name should end in `!` if a call might mutate one of its arguments;
+* macro names begin with `@`.
 
 ## Further Reading
 
