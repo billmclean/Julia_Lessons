@@ -15,7 +15,7 @@ condition is true.
 ## Objectives
 
 The aim of this lesson is to learn the basic logical operations that Julia
-provides for `Bool` variables, and to use them in some simple control flow
+provides for `Bool` variables, and to use them in some control flow
 constructions.  By the end of this lesson, you should know how to
 
 * use relational operators (for example, `<`) to compare values;
@@ -63,11 +63,11 @@ The *Boolean "not" operator* `!` is defined in the obvious way.
 | `true`  | `false` |
 | `false` | `true`  |
 
-We can use these operators in combinations with the comparison operators
+We can use these operators, in combination with the comparison operators,
 to build up logical expressions.  The comparison operators have the highest
 priority, followed by `!`, and finally by `&&` and `||`.  The expressions
 are evaluated from left to right.  In practice, it is often best to use
-parentheses so the meaning clear at a glance.
+parentheses so the meaning is clear at a glance.
 
 **Exercise.** Work out the truth value for each of the following expressions,
 and check your answers by typing them in the REPL.
@@ -80,7 +80,7 @@ and check your answers by typing them in the REPL.
 Both `&&` and `||` are *short-circuit operators*: the right operand is
 never evaluated if the truth value can be determined from only the left
 operand.  For example, if `A` if `false`, then `A && B` must be `false`,
-regardless of whether `B` is `true` or `false`, so there is not point in
+regardless of whether `B` is `true` or `false`, so there is no point in
 evaluating `B`.  Similarly, if `A` is `true`, then `A || B` must be `true`,
 regardless of whether `B` is `true` or `false`, so again there is no point
 in evaluating `B`.  Thus, after the statements
@@ -121,8 +121,8 @@ In this case,
 * `<statements1>` is executed iff `<condition1>` is `true`;
 * `<statements2>` is executed iff `<condition1>` is `false` and
 `<condition2>` is `true`;
-* `<statements3>` is executed iff `<condition1>` is `false` and
-`<condition2>` is `false`.
+* `<statements3>` is executed iff both `<condition1>` and `<condition2>` are
+`false`.
 
 Multiple `elseif` clauses are also permitted.  Recall our earlier example using
 the `&&` operator to assign the value `log(x)` to `y` provided `x>0`, and the
@@ -134,7 +134,7 @@ else
     y = NaN
 end
 ```
-A third alternative is
+A third, and more succinct, alternative is
 ```
 y = (x>0) ? log(x) : NaN
 ```
@@ -165,10 +165,11 @@ Notice that we have inserted comments in the source code to help the reader
 follow the steps in the code.  Julia will ignore any text you insert following
 a `#` character up to the end of the same line.
 
-**Exercise.** If $|4ac|$ is very small compared to $b^2$, then `dscr` will
-be approximately equal to $|b|$ so one of the roots can suffer from loss
-of precision due to cancellation of leading digits.  How could you improve
-the code to avoid this problem by exploiting the fact that $ax_+x_-=c$?
+**Exercise.**\* If `dscr` is positive and $|4ac|$ is very small compared to $b^2$, 
+then `dscr` will be approximately equal to $|b|$ so the computed value of one 
+of the roots can suffer from loss of precision due to cancellation of leading 
+digits.  How could you improve the code to avoid this problem by exploiting 
+the fact that $ax_+x_-=c$?
 
 The `solve_quadratic` function assumes that `a` is not `0`, since otherwise 
 we do not have a quadratic equation but just the linear
@@ -202,7 +203,7 @@ actual arguments, that is, the real method is chosen if `a`, `b`, `c` are all
 `Real`, and the complex method is chosen if `a`, `b`, `c` are all `Complex`.
 This paradigm, of selecting code based on the sequence of types of all
 actual arguments in a function call, is known as *multiple dispatch* and is
-a charactistic feature of the Julia programming language.
+a characteristic feature of the Julia programming language.
 
 ## For-Loop
 
@@ -276,7 +277,7 @@ for k = 1:10
 end 
 println("The sum equals ", s)
 ```
-into the REPL then Julia will not complain, and given the output
+into the REPL then Julia will not complain, and will give the output
 ```
 The sum equals 1.5497677311665408
 ```
@@ -296,7 +297,7 @@ println("The sum equals ", s)
 ```
 Removing the `global` declaration leads to an `UndefVarError` whether you
 run the code from a file or directly in the REPL.  The `add_it_up` function
-is quite unnatural; in practice, you should do
+is written in an unnatural way; in practice, you should do
 ```
 function add_it_up(n)
     s = 0.0

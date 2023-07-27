@@ -9,8 +9,8 @@ title: Lesson 6\. Matrices
 Many scientific and statistical applications give rise to large-scale 
 problems in linear algebra which are amenable to numerical solution
 thanks to modern computer hardware and software.  For instance, an
-average desktop computer can solves a $5,000\times5,000$ linear system
-in around a second, and find all of the eigenvalues and eigenvectors
+average desktop computer (in 2023) can solve a $5,000\times5,000$ linear 
+system in around a second, and find all of the eigenvalues and eigenvectors
 of a $5,000\times5,000$ real symmetric matrix in around 10 seconds.
 These and similar capabilities have opened up many new application
 areas for mathematical modelling and analysis.
@@ -44,7 +44,7 @@ A = [ 2  0  -7   1
       5  9   3  -1
       4  1   0  -6 ]
 ```
-creates an object `A` of type `Matrix{Int64}`.  Alternatively, you can
+creates `A` of type `Matrix{Int64}`.  Alternatively, you can
 define `A` on one line by doing
 ```
 A = [2 0 -7 1; 5 9 3 -1; 4 1 0 -6]
@@ -203,8 +203,8 @@ if and only if `size(A, 2)` equals `length(v)`.
 If `size(A)` equals `size(B)` then `C = A .* B` assigns `C` the 
 *elementwise product* of `A` and `B`, that is `C[i,j] = A[i,j] * B[i,j]`
 for all `i` and `j`.  This operation does not arise in linear algebra, but
-can be useful when the matrices are used to store elements of a two-dimensional
-data array of some kind.
+can be useful when the matrices are used to store elements of two-dimensional
+data arrays.
 
 **Exercise.** Compute `C * D` and `C .* D` by hand, if
 $$
@@ -236,13 +236,16 @@ then `x` holds the solution vector `[2.0, -3.0, 5.0]`.  The
 *backslash operator* `\` performs a *left division*, that is, `A \ b`
 evaluates $\mathbf{A}^{-1}\mathbf{b}$.  The inverse matrix $\mathbf{A}^{-1}$
 is not computed explicitly; instead a more computationally efficient 
-algorithm is used, based on an *LU factorisation* of $A$.  
+algorithm is used, based on an *LU factorisation* of $A$.  In general,
+for an $n\times n$ non-singular matrix `A`, the expression `A \ B` 
+evaluates $\textbf{A}^{-1}\textbf{B}$ for any matrix `B` with
+`size(B, 1)` equal to `n`.
 
 ## Eigenproblems
 
 The `LinearAlgebra` module provides many functions for solving problems
 in linear algebra.  In particular, `eigen` computes the eigenvalues and
-eigenvectors of a give square matrix.  If we define
+eigenvectors of a given square matrix.  If we define
 ```
 B = [ 3 -1  4
       5  2  6
@@ -253,7 +256,7 @@ then doing
 using LinearAlgebra
 F = eigen(B)
 ```
-creates an `Eigen` object `F` consisting of `F.values`, the vector of
+creates an `Eigen` object `F` for which `F.values` is the vector of
 eigenvalues,
 ```
 3-element Vector{ComplexF64}:
@@ -261,14 +264,14 @@ eigenvalues,
  3.499999999999994 + 5.361902647381801im
                5.0 + 0.0im
 ```
-and `F.vectors`, the matrix of eigenvectors,
+and `F.vectors` is the matrix of eigenvectors,
 ```
 3×3 Matrix{ComplexF64}:
  -0.337783+0.241488im  -0.337783-0.241488im  0.174593+0.0im
  -0.765641-0.0im       -0.765641+0.0im       0.931162+0.0im
  0.0900755+0.482976im  0.0900755-0.482976im  0.320087+0.0im
 ```
-Here, the kth column `F.vector[:,k]` is the eigenvector corresponding to the
+That is, the kth column `F.vector[:,k]` is the eigenvector corresponding to the
 eigenvalue F.value[k].
 
 **Exercise.** Verify for the example above that 
@@ -326,8 +329,8 @@ and `randn`;
 The documentation for the 
 [`LinearAlgebra`](https://docs.julialang.org/en/v1/stdlib/LinearAlgebra/)
 module describes many other functions that arise in matrix applications. 
-These functions are often designed to exploit any special structure that a 
-matrix posesses, such as symmetry or positive-definiteness.
+These functions are often designed to take advantage of any special structure 
+that a matrix posesses, such as symmetry or positive-definiteness.
 
 [**Back to All Lessons**](../index.html)
 

@@ -16,12 +16,12 @@ settings like font size, window size, background colour etc.
 The aim of this lesson is to learn how to read from and write to files.
 At the end of the lesson, you should know how to
 
-* open a stream to read from or write to a text file;
+* open an stream to read from or write to a text file;
 * close such a stream;
 * access a file via a do-construct;
 * read lines from a text file;
 * write lines to a text file;
-* read an array from a text file;
+* read an array from or write and array to a text file;
 * save data to a binary file, and load it again.
 
 * * *
