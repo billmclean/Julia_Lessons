@@ -147,6 +147,32 @@ to `(X[i,j] + sU[i,j], Y[i,j] + sV[i,j])`.
 
 ![Quiver plot](../resources/quiverplot.png)
 
+# Alternative Graphics Backends
+
+The `Plots` package relies on a software *backend* to create its graphical
+output.  The default backend is called [`GR`](https://gr-framework.org/) and 
+is the one most likely to work reliably.  Usually the output looks pretty much 
+the same for any choice of backend, but sometimes a particular backend might 
+offer extra features.  For example, the 
+[`Plotly`](https://plotly.com/graphing-libraries/) backend supports mouse 
+interaction to change the viewing angle in a 3D plot.  If you install the 
+`Plotly` package, do
+```
+using Plots
+plotly()
+```
+and then create a surface plot as described above, then the plot should open 
+in your default web browser, and you will be able to adjust the viewing angle 
+with your mouse.  The [`PythonPlot`](https://github.com/JuliaPy/PythonPlot.jl)
+backend relies on [matplotlib](https://matplotlib.org/), the well-known
+Python graphics library.  Doing
+```
+using Plots
+pythonplot()
+```
+changes the backend to `PythonPlot`, which also supports mouse interaction
+for 3D plots.
+
 * * *
 
 # Summary
@@ -165,9 +191,10 @@ The [Plots documentation](https://docs.juliaplots.org/latest/) explains the
 capabilities of the package in greater depth.  In particular, there is a
 [gallery](https://docs.juliaplots.org/latest/gallery/gr/) of examples that
 you can look through if you are not sure how to go about creating a
-particular kind of plot or achieving a particular effect.  You can easily
-produce many standard statistical plots using the
+particular kind of plot or achieving a particular effect.  The different
+[backends](https://docs.juliaplots.org/stable/backends/) are also discussed.
+You can easily produce many standard statistical plots using the
 [StatsPlots](https://docs.juliaplots.org/latest/generated/statsplots/)
-package.
+package.  
 
 [**Back to All Lessons**](../index.html)

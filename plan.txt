@@ -19,3 +19,5 @@
 09. Files
 
 10. More on Graphics
+
+rsync -avh resources/ z8900007@matht375.maths.unsw.edu.au:/home/z8900007/projects/Julia_Lessons/resources

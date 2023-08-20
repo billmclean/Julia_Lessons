@@ -43,8 +43,8 @@ n = codepoint('G')
 ```
 assigns to `n` the code point for an upper-case letter 'G', which turns out 
 to be `0x00000047`.  Here, `n` is an *unsigned 32-bit integer*, or `UInt32`,
-and the eigth digits following the `0x` given the hexadecimal representation
-of `n`.  Thus, `n` has the decimal value $4\times16+7=71$, as you can
+and the eight digits following the `0x` give the hexadecimal representation
+of `n`.  Thus, `n` has the decimal value $4\times16+7\times1=71$, as you can
 verify by typing `Int64(n)`.  Conversely, doing
 ```
 Char(n)
@@ -83,7 +83,7 @@ Here is a second line.
 ```
 The `println` takes a string and appends a `\n` before printing.  The
 difference between `print` and `println` is not immediately apparent
-in the REPL, but is obvious when running a `.jl` file.
+in the REPL, but is obvious when printing from a `.jl` file.
 
 You can *prevent* jumping to a new line by finishing a line with a
 backslash `\`.  Thus,
@@ -133,11 +133,11 @@ if
 s = "The Website of Dreadful Night"
 ```
 then `s[1]` equal `'T'`, `s[5]` equals `'W'` and `s[end]` equals `'t'`.
-Similarly, we can easily extract a *substring*: `s[5:11]` equals `"Website"`.
-Note that `s[16]` is the character `'D'`, whereas `s[16:16]` is the 
-string `"D"`.
+Similarly, we can easily extract a *substring*; for example, `s[5:11]` 
+equals `"Website"`.  Note that `s[16]` is the character `'D'`, whereas 
+`s[16:16]` is the string `"D"`.
 
-Like a tuples, a string is immutable.  If you try to do
+Like a tuple, a string is immutable.  If you try to do
 ```
 s[25] = 'L'
 ```
@@ -157,10 +157,10 @@ for instance
 ```
 q = "∀ ϵ > 0 ∃ > 0"
 ```
-We find that `length(q)` returns `13`, the number of characters, but
-`ncodeunits(q)` returns `18`, because some of the characters require more
-than one code unit.  In particular, `'∀'` uses three code units, and we
-find that `q[1]` gives `'∀'`, but `q[2]` and `q[3]` each throw a
+We find that `length(q)` returns `13`, the number of characters (including
+the spaces), but `ncodeunits(q)` returns `18`, because some of the characters 
+require more than one code unit.  In particular, `'∀'` uses three code units, 
+and we find that `q[1]` gives `'∀'`, but `q[2]` and `q[3]` each throw a
 `StringIndexError`.  Putting
 ```
 i = eachindex(q)
@@ -196,7 +196,7 @@ The `lowercase` and `uppercase` functions convert every character in a
 string to lower and upper case, respectively.
 ```
 s3 = "Mona Lisa Overdrive"
-print(lowercase(s))
+print(lowercase(s3))
 ```
 produces
 ```
@@ -205,7 +205,7 @@ mona lisa overdrive
 whereas
 ```
 s4 = "Virtual Light"
-print(uppercase(s))
+print(uppercase(s4))
 ```
 produces
 ```
@@ -241,15 +241,14 @@ xp, xm = solve_quadratic(1, -5, 2)
 ```
 where `xp` and `xm` are the zeros of the quadratic `x^2-5x+2`.  If we do
 ```
-s = "The zeros are $xp and $xm."
-println(s)
+println("The zeros are $xp and $xm.")
 ```
 then we obtain the output
 ```
 The zeros are 4.561552812808831 and 0.4384471871911697.
 ```
-This process is called *string interpolataion*: the characters `$xp` and
-`$xm` are replaced by the values of the variables `xp` and `xm`.
+This process is called *string interpolataion*: the character sequences
+`$xp` and `$xm` are replaced by the values of the variables `xp` and `xm`.
 
 We can gain fine control over how the value of a variable is formatted by
 using the macro `@sprintf` from the `Printf` module.  For example, if
@@ -290,10 +289,12 @@ produces
 Here, `%10s` says to print a string variable in a field of width 10, so
 `"Wilf"` is padded with 6 spaces.  Similarly, `%5d` says to print an integer
 variable in a field of width 5 using decimal digits.  If you omit the field
-width, then the printed output will be as small as possible.
+width from a format descriptor, then the field width will be as small as 
+possible, as we saw above when printing the variables `xp` and `xm`.
 
 For floating-point variables we can use fixed point format `f` or exponential
-format `e`, as in the next example.
+format `e`, that allow us to specify both the field width and the number
+of digits following the decimal point, as in the next example.
 ```
 @printf("|%10.4f|\n", π)
 @printf("|%12.4e|\n", exp(10))
@@ -304,15 +305,15 @@ produces
 |  2.2026e+04|
 ```
 Notice that in each case, the output is right-justified, which is useful
-when printing tables.  Also, note that we need to append a trailing newline
+when printing tables. Also, note that we need to append a trailing newline
 character `\n` to the format string if we want subsequent output to follow
 on the next line.
 
 ## Docstrings
 
-A *docstring* describes the purpose and any other information about a
-function.  Recalling our `solve_quadratic` function from Lesson 4, we could
-do the following.
+A *docstring* describes the purpose of, and key information about, a function. 
+Recalling our `solve_quadratic` function from Lesson 4, we could do the 
+following.
 ```
 """
     solve_quadratic(a, b, c)
@@ -330,10 +331,12 @@ function solve_quadratic(a, b, c)
 end
 ```
 
-If we type `solve_quadratic` at the `help>` prompt (in other words, at the
-`julia>` prompt type `?` followed by `solve_quadratic`), the Julia will
-print the docstring.  Try it.  Notice that we indent the first line of
-the docstring 4 spaces, and put backticks around any mathematical expressions.
+Thus, the docstring is a triple quoted string placed just before the
+`function` statement.  If we type `solve_quadratic` at the `help>` prompt 
+(in other words, at the `julia>` prompt type `?` followed by `solve_quadratic`), 
+then Julia will print the docstring.  Try it.  Notice that we indent the 
+first line of the docstring 4 spaces, and put backticks around any mathematical 
+expressions.
 
 * * *
 
@@ -346,20 +349,20 @@ This lesson described how
 * the newline and backslash characters can force or inhibit a line break;
 * a triple quoted string can preserve the line breaks in a long string
 extending over several lines;
-* indexing works for strings, and the complications associated with some
-non-ASCII characters;
-* strings can be concatenated or repeated;
-* string interpolation makes it easy to insert the value of a variable into
-a string;
-* the `@sprintf` and `@printf` macros can be used to control the formatting
-of strings and printed output;
-* a docstring can be provided for a function.
+* indexing works for strings, but complications associated if non-ASCII 
+characters are present;
+* to concatenate or repeat a string;
+* to insert the value of a variable into a string;
+* to control the formatting of strings and printed output using the `@sprintf` 
+and `@printf` macros;
+* to provide a docstring for a function.
 
 ## Further Reading
 
 More details can be found in the section on 
-[strings](https://docs.julialang.org/en/v1/manual/strings/) in the Julia
-documentation.
+[Strings](https://docs.julialang.org/en/v1/manual/strings/) in the Julia
+documentation.  See also some 
+[Guidelines for writing docstrings](https://docs.julialang.org/en/v1/manual/documentation/#Writing-Documentation).
 
 [**Back to All Lessons**](../index.html)
 
