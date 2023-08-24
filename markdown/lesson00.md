@@ -30,11 +30,16 @@ examples and exercises while reading.
 The lessons aim to provide the minimum necessary information for you to make 
 effective use of Julia in your courses.  At the end of each lesson, we 
 provide suggestions for further reading. The Linux version of Julia is 
-available on the PCs in the Maths & Stats computer labs.  To run Julia on 
-your own computer, you can download an installer from
-[https://julialang.org](https://julialang.org).  Versions are provided for 
-Windows, MacOS and Linux.  Windows users can also install Julia from the 
-Windows store.
+available on the PCs in the Maths & Stats computer labs.  To run Julia and
+VSCode on your own computer, you can download the installers for your
+operating system (Windows, MacOS or Linux) from
+[https://julialang.org](https://julialang.org) and 
+[https://code.visualstudio.com/download](
+https://code.visualstudio.com/download).
+Windows users can also install Julia and VSCode from the Windows store.
+After installing both applications, follow
+[these instructions](https://code.visualstudio.com/docs/languages/julia) to
+install the Julia extension for VSCode.
 
 * * *
 
@@ -65,9 +70,9 @@ below.
 
 ![The Julia REPL](../resources/REPL.png)
 
-If you installed Julia on Windows, then you should be able to find a graphical 
-launcher that opens the Julia REPL in a command window.  On MacOS, you should 
-be able to run Julia from a Bash terminal just as on Linux.
+On Windows, you should be able to find a graphical launcher that opens the 
+Julia REPL in a command window.  On MacOS, you should be able to run Julia 
+from a Bash terminal just as on Linux.
 
 At the Julia prompt, try typing
 
@@ -109,16 +114,15 @@ functions.  Look up the help messages for some of them.
 
 ## Quitting from the REPL
 
-You can quit the REPL by typing Ctrl+D as the first character following the
-`julia>` or `help>` prompts.
+You can quit the REPL by typing Ctrl-D as the first character following the
+`julia>` or `help>` prompt.
 
 ## VSCode
 
 VSCode is an *Integrated Development Environment*, or *IDE*, that supports 
 the use of *extensions* for a wide variety of programming languages 
-including Julia.  On the lab PCs you can start VSCode with the Julia 
-extension installed by typing `code` in a Bash terminal window or by 
-clicking on the graphical launcher: look for the logo
+including Julia.  You should be able to find a launcher with the following 
+logo.
 
 ![VSCode logo](../resources/vscode.png){width=20%}
 
@@ -129,15 +133,15 @@ something like the screenshot below.
 
 ![VSCode window](../resources/VSCode-welcome.png)
 
-To install and acitvate the Julia extension for VSCode, follow 
-[these instructions](https://code.visualstudio.com/docs/languages/julia).
+On Linux you can start VSCode from the Bash terminal by typing `code`.
 
-Once the Julia extension is active, open the VSCode *command palette* by 
-typing Ctrl+Shift+P or by selecting this option from the View menu.  In 
-the text box, type `start REPL`.  On the bottom bar of the VSCode window,
-you should see "Julia env:v1.9" and "Julia: Starting Language Server". Soon, 
-one of the panes should display the `julia>` prompt.  VSCode will start 
-downloading some cache files, but you can start using the REPL immediately.
+Open the VSCode *command palette* by typing Ctrl+Shift+P or by selecting 
+this option from the View menu.  In the text box, type `start REPL`.  
+Assuming that the Jula extension is installed, you should see "Julia env:v1.9" 
+and "Julia: Starting Language Server" on the bottom bar of the VSCode window,
+and soon one of the panes should display the `julia>` prompt.  VSCode will 
+start downloading some cache files, but you can start using the REPL 
+immediately.
 
 ## Running .jl Files
 
