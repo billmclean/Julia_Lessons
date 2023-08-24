@@ -2,8 +2,6 @@
 title: Lesson 8\. Logic and Control
 ---
 
-## Lesson 8. Logic and Control
-
 ## Truth Value
 
 So far in these lessons we have worked with a variety of data types including
@@ -267,9 +265,9 @@ Disambiguate by using `local s` to suppress this warning or `global s`
 to assign to the existing global variable.
 ```
 Following the warning, Julia throws an `UndefVarError` since the
-statement `s += 1/k^2` is equivalent to `s = s + 1/k^2`, and the 
-"new local" `s` is undefined.  However, if you actually type (or copy 
-and paste) 
+statement `s += 1/k^2` is equivalent to `s = s + 1/k^2`, and on the 
+right-hand side the "new local" `s` is undefined.  However, if you type 
+(or copy and paste) 
 ```
 s = 0.0
 for k = 1:10
@@ -277,7 +275,7 @@ for k = 1:10
 end 
 println("The sum equals ", s)
 ```
-into the REPL then Julia will not complain, and will give the output
+into the REPL, then Julia will not complain, and will give the output
 ```
 The sum equals 1.5497677311665408
 ```
@@ -297,7 +295,8 @@ println("The sum equals ", s)
 ```
 Removing the `global` declaration leads to an `UndefVarError` whether you
 run the code from a file or directly in the REPL.  The `add_it_up` function
-is written in an unnatural way; in practice, you should do
+was written in an unnatural way simply to illustate how hard scope differs 
+from soft scope; in practice, we would do
 ```
 function add_it_up(n)
     s = 0.0
@@ -309,7 +308,7 @@ end
 
 println("The sum equals ", add_it_up(10))
 ```
-We no longer need the `global` declaration because the for-loop is now
+We no longer need the `global` declaration because `s` is created
 in the local scope of the function rather than in the global scope of the
 file.
 

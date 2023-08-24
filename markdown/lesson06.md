@@ -2,8 +2,6 @@
 title: Lesson 6\. Matrices
 ---
 
-# Lesson 6. Matrices
-
 ## Numerical Linear Algebra
 
 Many scientific and statistical applications give rise to large-scale 

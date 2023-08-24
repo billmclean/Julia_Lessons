@@ -2,8 +2,6 @@
 title: Lesson 5\. Plotting
 ---
 
-## Lesson 5. Plotting
-
 Many applications of computational mathematics involve processing large arrays 
 of data, and often the best way to make sense of such a volume of numerical 
 output is with some appropriate kind of *visualisation*. For this reason, the 

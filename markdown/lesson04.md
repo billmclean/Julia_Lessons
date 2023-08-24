@@ -2,8 +2,6 @@
 title: Lesson 4\. Functions
 ---
 
-# Lesson 4. Functions
-
 ## Objectives
 
 We have met a few functions in previous lessons, mostly ones provided from
@@ -341,10 +339,10 @@ character `!` as a visual warning to anyone reading the code.
 A *macro* is a rule or pattern for transforming a tuple of arguments to a
 returned expression that Julia evaluates.  In Julia, the name of every
 macro begins with the `@` character.  The creation of macros is beyond the
-scope of there lessons, but many useful macros are provided by Julia and
+scope of these lessons, but many useful macros are provided by Julia and
 its standard library.  A simple example is `@show`, that is handy for
-showing the value of a variable in a `.jl` file.  If we execute a file
-containing the statements
+quickly showing both the *name* and the *value* of a variable in a `.jl` file.  
+If we execute a file containing the statements
 ```
 escape_velocity = 11.2
 @show escape_velocity

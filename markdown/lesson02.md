@@ -5,8 +5,6 @@ title: Lesson 2\. Names
 > There are only two hard things in Computer Science: cache invalidation and
 > naming things. [Phil Karlton](https://quotesondesign.com/phil-karlton/)
 
-# Lesson 2. Names
-
 ## Objectives
 The aim of this lesson is to understand the use of variables and functions.
 We have already made informal use of both in previous lessons, but will now 
@@ -142,7 +140,8 @@ The `*` may be omitted following a numeric literal coefficient so that,
 for example, Julia interprets `2x` as `2 * x`, and `5(a+3)` as `5 * (a+3)`.
 There are a few exceptions.  In particular, `3.2e-5` is always interpreted
 as the floating-point number $3.2\times 10^{-5}$, and not the
-expression `3.2 * e - 5`.
+expression `3.2 * e - 5`.  Note, however, that no space is permitted 
+immediately following the coefficient.  Thus, `2 x` will throw an error.
 
 **Exercise.** Perform some experiments to determine if `2x^2` is interpreted
 as `(2x)^2` or `2(x^2)`.  What about `2^2x`?

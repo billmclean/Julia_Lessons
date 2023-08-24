@@ -2,8 +2,6 @@
 title: Lesson 1\. Arithmetic
 ---
 
-# Lesson 1. Arithmetic
-
 ## Using Julia as a Scientific Calculator
 
 We can use the Julia REPL as a scientific calculator to perform simple
@@ -202,7 +200,7 @@ Strictly speaking, `floatmin()` gives the smallest *normalised*
 positive number.  It is possible to represent smaller values by allowing 
 *denormalised* numbers, that is, by allowing a mantissa smaller than $1$.
 
-Of particular importance is the `eps` function that returns the
+Of particular importance is the function `eps()` that returns the
 *machine epsilon*, defined as the smallest positive number $\epsilon$
 such that the rounded value of $1+\epsilon$ is strictly greater than $1$.
 Thus, if $x$ is any positive machine number *strictly less than* $\epsilon$,

@@ -2,8 +2,6 @@
 title: Lesson 7\. Strings
 ---
 
-# Lesson 7. Strings
-
 ## Text Processing
 
 In an earlier lesson, we have seen simple examples using strings as labels

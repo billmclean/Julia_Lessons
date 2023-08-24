@@ -2,8 +2,6 @@
 title: Lesson 0\. Using Julia
 ---
 
-# Lesson 0. Using Julia
-
 ## What is Julia?
 
 [Julia](https://julialang.org/) is a programming language designed for 
