@@ -151,7 +151,7 @@ showing the binary representation of given number.  Look at the output of
 `Int8(0)` and `Int8(1)`.
 
 The arithmetic registers in the CPU actually perform integer arithmetic
-modulo $2^{64}$ with the result in the interval $[-2^{63},2^{63-1}]$.  Thus,
+modulo $2^{64}$ with the result in the interval $[-2^{63},2^{63}-1]$.  Thus,
 the result of
 ```
 typemax(Int64) + 1
@@ -226,18 +226,21 @@ atan(Inf)
 tahn(-Inf)
 cos(1/Inf)
 ```
-However, there are some arithmetic expression that cannot be given any
-meaningful value, either finite or infinte.  For example, try the following.
+However, some arithmetic expressions cannot be given any
+meaningful value, either finite or infinite.  For example, try the following.
 ```
 0.0/0.0
 Inf - 2*Inf
+```
+In both cases, the result is `NaN`, which stands for `Not-a-Number`.
+There is nothing magical about `Inf` and `NaN`: they are just special bit 
+patterns that you can look at by calling `bitstring(Inf)` and `bitstring(NaN)`.
+
+**Exercise.** What is the result of the following function calls?
+```
 sin(Inf)
 log(-1.0)
 ```
-In each case, the result is `NaN`, which stands for `Not-a-Number`.
-There is nothing magical about `Inf` and `NaN`: they are just special bit 
-patterns that you can look at by calling `bitstring(Inf)` and 
-`bitstring(NaN)`.
 
 ## Mixed-Mode Arithmetic
 

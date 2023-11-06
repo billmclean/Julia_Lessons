@@ -73,7 +73,7 @@ You can modify the plot style using keyword arguments. For example,
 plot(x, y, linestyle=:dash)
 ```
 produces a dashed curve instead of a solid one.  Other possible line styles
-include `:solid` (the defaut), `:dot`, `:dashdot` and `:dashdotdot`.  
+include `:solid` (the default), `:dot`, `:dashdot` and `:dashdotdot`.  
 
 The `plotattr` function is useful for looking up plot attributes.  For 
 example,
@@ -113,7 +113,7 @@ type commands into a `.jl` file rather than directly in the REPL.  Open
 a new editor pane in VSCode, type the following lines of code and save to 
 a file `sine_plot.jl`.
 ```
-Using Plots
+using Plots
 x = range(0, 2π, length=201)
 y = sin.(x)
 plot(x, y, 

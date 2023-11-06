@@ -244,7 +244,7 @@ to get a summary of what this module provides.  You can also use tab completion
 to see a list of the objects in a module.  Try typing `Dates.` followed by a
 double TAB.
 
-**Exercise.** What happens if you type `Dates.day` followed by TAB?
+**Exercise.** What happens if you type `Dates.day` followed by a double TAB?
 
 Each module constitutes a distinct *namespace*, which means that there is
 nothing to stop programmers from using the same name for different objects

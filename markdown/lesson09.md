@@ -199,7 +199,7 @@ create a 392K binary file `big_matrix.jld2` and a 1022K text file
 `big_matrix.txt`.  In a new Julia session, we can recover the matrix `A`
 using the `@load` macro.
 ```
-@load big_matrix.jld2 A
+@load "big_matrix.jld2" A
 ```
 You can also save and load multiple variables: after
 ```

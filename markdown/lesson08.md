@@ -221,7 +221,7 @@ produces the output
 1, 3, 5, 
 ```
 Instead of the vector `[1, 3, 5]` we could just as well have used the
-tuple `(1, 3, 5)` or the range `1:2:5`.  In the the last case, the standard
+tuple `(1, 3, 5)` or the range `1:2:5`.  In the last case, the standard
 practice is to use an equivalent form of the for-loop where `=` replaces `in`.
 ```
 for k = 1:2:5

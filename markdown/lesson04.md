@@ -141,12 +141,13 @@ It is also possible to provide a *default value* for a dummy argument.  This
 default value is used when the corresponding actual argument is omitted from
 a function call.  For example, consider the function
 ```
-normal_distribution(x, μ=0.0, σ=1.0) = exp(-((x-μ)/σ)^2/2) / (σ*sqrt(2π))
+normal_distribution(x, μ=0.0, σ=1.0) =
+    exp(-((x-μ)/σ)^2/2) / (σ*sqrt(2π))
 ```
 Calling `normal_distribution(x)` returns the value at `x` of the *standard* 
 normal density (that is, with mean `0.0` and standard deviation `1.0`), but 
 we could call `normal_distribution(x, 3.0, 0.5)` for a 
-normal distribution with mean `3.0` and standard deviation `5.0`. 
+normal distribution with mean `3.0` and standard deviation `0.5`. 
 
 ## Local Variables
 
@@ -158,7 +159,7 @@ a new file called `solve_quadratic.jl`.  Type the following lines in this file.
 ```
 function solve_quadratic(a, b, c)
     sqrt_dscr = sqrt(b^2 - 4a*c)
-    x_plus = ( -b + sqrt_dscr ) / (2a)
+    x_plus  = ( -b + sqrt_dscr ) / (2a)
     x_minus = ( -b - sqrt_dscr ) / (2a)
     return x_plus, x_minus
 end

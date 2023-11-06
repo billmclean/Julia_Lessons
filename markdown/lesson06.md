@@ -269,12 +269,12 @@ and `F.vectors` is the matrix of eigenvectors,
  -0.765641-0.0im       -0.765641+0.0im       0.931162+0.0im
  0.0900755+0.482976im  0.0900755-0.482976im  0.320087+0.0im
 ```
-That is, the kth column `F.vector[:,k]` is the eigenvector corresponding to the
-eigenvalue F.value[k].
+That is, the kth column `F.vectors[:,k]` is the eigenvector corresponding to the
+eigenvalue `F.values[k]`.
 
 **Exercise.** Verify for the example above that 
 ```
-B * F.vector[:,k] - F.value[k] * F.vector[:,k]
+B * F.vectors[:,k] - F.values[k] * F.vectors[:,k]
 ```
 is close to the zero vector for all `k`.
 
