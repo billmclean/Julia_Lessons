@@ -39,8 +39,12 @@ Julia prints an error message because `7` is not permitted as the first
 character in a variable name.  Underscores are useful mainly in longer names
 that require more than one word, as in the next example.
 ```
-escape_velocity = 9.8
+escape_velocity = 40_270
 ```
+This example also illustrates the fact that underscores can be used to 
+make a long number easier to read by separating the digits into groups.  
+(Julia just ignores the underscores, so `40_270` is interpreted as `40270`.)
+
 A variable name consisting *only* of underscores has a special status: such
 a variable can be assigned a value, which is immediately discarded and
 cannot be used in a subsequent expression.  For example, if a function 
@@ -71,9 +75,9 @@ would be `Yes` and `No` (or `Yea` and `Nay`).
 
 ## Assigning Values
 
-The equal sign `=` is used to assign a value to a variable. The value can 
-be a literal constant, as in the `escape_velocity` example above, or an 
-expression. Consider the following statements.
+We have seen already that the equal sign `=` is used to assign a value to 
+a variable. The value can be a literal constant, as in the `escape_velocity` 
+example above, or an expression. Consider the following statements.
 ```
 x = 4
 x = x + 1/x

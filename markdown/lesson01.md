@@ -187,7 +187,7 @@ for positive and $1$ for negative), next are 11 bits for storing
 the exponent $e$, and finally 52 bits for storing the mantissa $m$. A
 *machine number* is one that can be represented exactly in this format.
 
-The function `floatmax` and `floatmin` return the largest and smallest 
+The functions `floatmax` and `floatmin` return the largest and smallest 
 positive (finite) numbers for any subtype `T` of `AbstractFloat`.  Try
 the following examples.
 ```
@@ -290,7 +290,7 @@ evaluates to `-55//26`.
 ## Complex Numbers
 
 Just as a `Rational` number consists of a numerator and denominator, a
-`Complex` consists of a real and an imaginary part.  For example, if
+`Complex` number consists of a real and an imaginary part.  For example, if
 ```
 z = 3.2 - 7.2im
 ```
