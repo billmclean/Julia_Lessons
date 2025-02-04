@@ -104,10 +104,10 @@ hypot(3, 4)
 
 The REPL supports *tab completion* in many contexts.  For example, if you 
 are not sure about the name of a Julia object you can try typing the first 
-few letters followed by Tab key.  
+few letters and then hitting TAB twice.
 
-**Exercise.** Type `?sin` followed by Tab.  You should see a list of several 
-functions.  Look up the help messages for some of them.
+**Exercise.** Type `?sin` followed by TAB-TAB.  You should see a list of 
+several functions.  Look up the help messages for some of them.
 
 ## Quitting from the REPL
 

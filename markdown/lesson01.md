@@ -152,7 +152,7 @@ showing the binary representation of given number.  Look at the output of
 `bitstring(n)` if `n` is `typemin(Int8)`, `typemax(Int8)`, `Int8(-1)`,
 `Int8(0)` and `Int8(1)`.
 
-The arithmetic registers in the CPU actually perform integer arithmetic
+The `Int64` registers in the CPU actually perform integer arithmetic
 modulo $2^{64}$ with the result in the interval $[-2^{63},2^{63-1}]$.  Thus,
 the result of
 ```

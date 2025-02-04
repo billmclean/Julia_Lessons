@@ -165,7 +165,7 @@ that any change to `y` also affects `x`.  For example,
 y[4] = 1
 ```
 changes both `x` and `y` to become `[3, -6, 7, 1, 2]`.  If you do not 
-want this behavious, then you must define `y` to be a *copy* of `x`.  One
+want this behaviour, then you must define `y` to be a *copy* of `x`.  One
 way is to use the `copy` function,
 ```
 y = copy(x)

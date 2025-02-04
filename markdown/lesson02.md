@@ -41,7 +41,7 @@ Julia prints an error message because `7` is not permitted as the first
 character in a variable name.  Underscores are useful mainly in longer names
 that require more than one word, as in the next example.
 ```
-escape_velocity = 9.8
+escape_velocity = 11.2 
 ```
 A variable name consisting *only* of underscores has a special status: such
 a variable can be assigned a value, which is immediately discarded and
@@ -84,7 +84,7 @@ The first statement assigns the value `4` to `x`, after which the second
 statement evaluates the expression `x + 1/x`, that is, `4 + 1/4`, which
 equals `4.25`, and assigns this value to `x`.  Note that the second statement
 is *not* asserting that `x` *equals* `x + 1/x`.  In fact, the mathematical
-equation $x=x+1/x$ is not satisfied *any* number $x$.  You should therefore
+equation $x=x+1/x$ is not satisfied by *any* number $x$.  You should therefore
 read the second statement as "`x` is assigned the value `x + 1/x`" or
 "update `x` to the value `x + 1/x`" or, more succinctly, "`x` gets `x + 1/x`".
 

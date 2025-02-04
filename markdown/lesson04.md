@@ -39,10 +39,10 @@ f(0.5)
 f(1.0)
 ```
 The first statement defines a Julia function called `f`, and the next two
-show that $f(0.5)\approx 1.6024$ and $f(1.0)\approx-0.7568$.  Since $f$
-changes sign it must have at least one zero in the interval $(0.5,1.0)$. 
-We can compute this zero using a function `find_zero` provided by a Julia 
-module called [`Roots`](https://juliamath.github.io/Roots.jl/stable/).
+show that $f(0.5)\approx 1.6024$ and $f(1.0)\approx-0.7568$.  Since $f$ is
+continuous and changes sign, it must have at least one zero in the interval 
+$(0.5,1.0)$.  We can compute this zero using a function `find_zero` provided by 
+a Julia module called [`Roots`](https://juliamath.github.io/Roots.jl/stable/).
 
 The `Roots` module is not part of Julia's standard library.  Instead, `Roots` 
 is a third-party *package* and so is not immediately available when you install
@@ -60,10 +60,11 @@ and ask if you want to install it.  Type `y` and Julia will download and install
 `Roots` as well as any of its dependencies, that is, any other packages that 
 `Roots` needs.  
 
-The `find_zero` function takes as its first argument the function `f` whose zero
-we wish to find, and as its second argument an interval bracketing the zero,
-with `f` positive at one end and negative at the other.  Here, the 'interval' is
-really a vector `[a, b]` or tuple `(a, b)` with two elements.  Type
+`Roots` provided the `find_zero` function that takes as its first argument 
+the function `f` whose zero we wish to find, and as its second argument an 
+interval bracketing the zero, with `f` positive at one end and negative at 
+the other.  Here, the 'interval' is really a vector `[a, b]` or tuple 
+`(a, b)` with two elements.  Type
 ```
 z = find_zero(f, [0.5, 1.0])
 ```
