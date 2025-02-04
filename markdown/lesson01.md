@@ -2,8 +2,6 @@
 title: Lesson 1\. Arithmetic
 ---
 
-# Lesson 1. Arithmetic
-
 ## Using Julia as a Scientific Calculator
 
 We can use the Julia REPL as a scientific calculator to perform simple
@@ -189,7 +187,7 @@ for positive and $1$ for negative), next are 11 bits for storing
 the exponent $e$, and finally 52 bits for storing the mantissa $m$. A
 *machine number* is one that can be represented exactly in this format.
 
-The function `floatmax` and `floatmin` return the largest and smallest 
+The functions `floatmax` and `floatmin` return the largest and smallest 
 positive (finite) numbers for any subtype `T` of `AbstractFloat`.  Try
 the following examples.
 ```
@@ -202,7 +200,7 @@ Strictly speaking, `floatmin()` gives the smallest *normalised*
 positive number.  It is possible to represent smaller values by allowing 
 *denormalised* numbers, that is, by allowing a mantissa smaller than $1$.
 
-Of particular importance is the `eps` function that returns the
+Of particular importance is the function `eps()` that returns the
 *machine epsilon*, defined as the smallest positive number $\epsilon$
 such that the rounded value of $1+\epsilon$ is strictly greater than $1$.
 Thus, if $x$ is any positive machine number *strictly less than* $\epsilon$,
@@ -228,18 +226,21 @@ atan(Inf)
 tahn(-Inf)
 cos(1/Inf)
 ```
-However, there are some arithmetic expression that cannot be given any
-meaningful value, either finite or infinte.  For example, try the following.
+However, some arithmetic expressions cannot be given any
+meaningful value, either finite or infinite.  For example, try the following.
 ```
 0.0/0.0
 Inf - 2*Inf
+```
+In both cases, the result is `NaN`, which stands for `Not-a-Number`.
+There is nothing magical about `Inf` and `NaN`: they are just special bit 
+patterns that you can look at by calling `bitstring(Inf)` and `bitstring(NaN)`.
+
+**Exercise.** What is the result of the following function calls?
+```
 sin(Inf)
 log(-1.0)
 ```
-In each case, the result is `NaN`, which stands for `Not-a-Number`.
-There is nothing magical about `Inf` and `NaN`: they are just special bit 
-patterns that you can look at by calling `bitstring(Inf)` and 
-`bitstring(NaN)`.
 
 ## Mixed-Mode Arithmetic
 
@@ -289,7 +290,7 @@ evaluates to `-55//26`.
 ## Complex Numbers
 
 Just as a `Rational` number consists of a numerator and denominator, a
-`Complex` consists of a real and an imaginary part.  For example, if
+`Complex` number consists of a real and an imaginary part.  For example, if
 ```
 z = 3.2 - 7.2im
 ```

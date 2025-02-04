@@ -2,33 +2,30 @@
 title: Lesson 9\. Files
 ---
 
-# Lesson 9. Files
-
 ## Input and Output of Data
 
 Only small amounts of data can be input by typing commands in a shell or a
-source file.  Large amounts of data need to be stored in files.  Also, some
-programs require *configuration files* to provide a large number of 
-settings like font size, window size, background colour etc.
+source file.  Handling larger amounts of data typically involves working
+with text or binary files.
 
 ## Objectives
 
 The aim of this lesson is to learn how to read from and write to files.
 At the end of the lesson, you should know how to
 
-* open an stream to read from or write to a text file;
+* open a stream to read from, or write to, a text file;
 * close such a stream;
 * access a file via a do-construct;
 * read lines from a text file;
 * write lines to a text file;
-* read an array from or write and array to a text file;
+* read an array from, or write an array to, a text file;
 * save data to a binary file, and load it again.
 
 * * *
 
 ## Reading from a Text File
 
-The file [quote.txt](../downloads/quote.txt) is a text file containing an 
+The text file [quote.txt](../downloads/quote.txt) contains an 
 extract from the book *Progress and Poverty*, by Henry George.  Use the
 link to download this file to your VSCode working folder so that it appears 
 in the Explorer pane.  Start a Julia REPL and type the command
@@ -36,7 +33,7 @@ in the Explorer pane.  Start a Julia REPL and type the command
 io = open("quote.txt", "r")
 ```
 which opens the file and creates an `IOStream` object `io`.  The *mode*
-argument "r" means that the file is opened for reading only.
+argument `"r"` means that the file is opened for reading only.
 
 The `readline` function reads one line of a text file, so the commands
 ```
@@ -61,7 +58,7 @@ displaying
 "and interest do not depend upon the produce of labor and capital, "
 ```
 (The characters in the file are all ASCII, and so each takes up only one
-code unit, that is, one byte.)  The most common usage of the `seek` function
+code unit, that is, one byte.)  A common usage of the `seek` function
 is `seek(io, 0)` that rewinds to the start of the file.
 
 The `eachline` function returns an iterator that allows the file to be 
@@ -85,16 +82,17 @@ for line in eachline(io)
     end
 end
 ```
-Here, the `split` function splits the string `line` at the spaces, returning
+Here, the `split` function splits the string `line` at every space, returning
 a vector whose kth element is the kth word in the line.  We have to allow
-for blank lines for which the vector is `[]` that has length zero.
+for blank lines for which the vector is `[]` that has length zero and so
+attempting to access `word_list[1]` would throw a `BoundsError`.
 
 When finished reading from a file, you must close the IO stream with the 
 command
 ```
 close(io)
 ```
-You can also pass a function to `open`: the single statement
+You can also pass a function argument to `open`. The single statement
 ```
 x = open(f, "somefile.txt", "r")
 ```
@@ -159,13 +157,13 @@ A = [ 3  -2  5  7
       1   3  8  2 ]
 writedlm("backup.txt", A)
 ```
-You should see a file `A.txt` that contains the lines
+You should see a file `backup.txt` that contains the lines
 ```
 3       -2      5       7
 0       4       4       9
 1       3       8       2
 ```
-If you restart Julia by doing Ctrl+Shift+P and 'Julia: Restart REPL' so 
+If you restart Julia by doing Ctrl+Shift+P and typing 'Julia: Restart REPL' so 
 that `A` is undefined, then the `readdlm` function can be used to retrieve
 the matrix entries:
 ```
@@ -201,7 +199,7 @@ create a 392K binary file `big_matrix.jld2` and a 1022K text file
 `big_matrix.txt`.  In a new Julia session, we can recover the matrix `A`
 using the `@load` macro.
 ```
-@load big_matrix.jld2 A
+@load "big_matrix.jld2" A
 ```
 You can also save and load multiple variables: after
 ```
@@ -211,6 +209,8 @@ we can do
 ```
 @load "matrices.jld2" A B C
 ```
+
+* * *
 
 ## Summary
 

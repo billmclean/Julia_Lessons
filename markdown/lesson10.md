@@ -2,17 +2,15 @@
 title: Lesson 10\. More on Graphics
 ---
 
-## Lesson 10. More on Graphics
-
-# Visualisation of Multidimensional Functions
+## Visualisation of Multidimensional Functions
 
 The `plot` function suffices for graphing simple curves of the form $y=f(x)$.
 For more complex plots involving functions of several variables or 
 vector-valued functions, the `Plots` package provides additional functions.
 
-# Objectives
+## Objectives
 
-This final lesson describe a range of additional plot types provided by
+This final lesson describes a range of additional plot types provided by
 `Plots`.  By the end of this lesson, you will be able to create
 
 * a parametric plot;
@@ -26,14 +24,14 @@ file, such as a `.png` or `.jpg` file.
 
 * * *
 
-# Parametric Plots
+## Parametric Plots
 
 In this and the following section, our examples will assume that the 
 command
 ```
 using Plots, LaTeXStrings
 ```
-has be executed beforehand so that the necessary graphics functions are
+has been executed beforehand so that the necessary graphics functions are
 available, as well as support for LaTeX.
 
 The basic `plot` command can be used to plot a parametric curve, as in the
@@ -42,13 +40,17 @@ following example that plots an ellipse.
 t = range(-1, 1, length=301)
 x = 3 * cospi.(t)
 y = sinpi.(t)
-plot(x, y, xlabel="x", ylabel="y", label="ellipse", aspect_ratio=:equal)
+plot(x, y, xlabel="x", ylabel="y", 
+     label="ellipse", aspect_ratio=:equal)
 ```
 The output is shown below.
 
-![Ellipse](../resources/ellipse.png)
+![Parametric plot of an ellipse](../resources/ellipse.png)
 
-# Logarithmic Scales
+By setting `aspect_ratio=:equal` we ensure that the scale on the x-axis
+is the same as the scale on the y-axis.
+
+## Logarithmic Scales
 
 If the y-values of a plot vary over several orders of magnitude, then a log
 scale on the y-axis will often allow the behaviour of the curve to be seen
@@ -65,22 +67,20 @@ plot(p1, p2, layout=(2, 1))
 ```
 The output is as follows.
 
-![Log scale](../resources/semilogy.png)
+![Plotting with a log scale](../resources/semilogy.png)
 
 We can also set `xscale=:log10` to use a log scale on the x-axis.
 
-* * *
-
-# Contour Plots
+## Contour Plots
 
 Recall that a *contour* or *level set* of a real-valued function $f(x,y)$ is a
 curve of the form $f(x,y)=c$ for some constant $c$.  A standard way of
 visualising $f$ is to plot the family of contours determined by a sequence
-of values of the constant $c$.
+of values for $c$.
 
 If $f(x,y)=x^3-3x+y^2$ then we can create a contour plot of $f$ as follows.
 ```
-f(x, y)=x^3 - 3x + y^2
+f(x, y) = x^3 - 3x + y^2
 x = range(-3, 3, length=250)
 y = range(-4, 4, length=200)
 z = f.(x', y)
@@ -89,23 +89,23 @@ contour(x, y, z, xlabel=L"x", ylabel=L"y", levels=20)
 Here, `z` is a $200\times250$ matrix with `z[i,j] = f(x[j], y[i])`, since 
 `x'` is $1\times250$ and `y` has length $200$.  The output is shown below.
 
-![Contour plot](../resources/contour.png)
+![A contour plot](../resources/contour.png)
 
 Replacing `contour` with `contourf` produces a *filled* contour plot.
 
-![Filled contour plot](../resources/contourf.png)
+![A filled contour plot](../resources/contourf.png)
 
-# Surface Plots
+## Surface Plots
 
 Another way to visualise a real-valued function $f(x, y)$ is to plot
-the graph of $z=f(x,y)$ in xyz-space.  With `x`, `y` and `z` defined
-as in the contour plot example,
+the graph, $z=f(x,y)$, in xyz-space.  With the vectors `x`, `y` and `z` 
+defined as in the contour plot example above,
 ```
 surface(x, y, z, xlabel=L"x", ylabel=L"y", zlabel=L"z")
 ```
 produces the following output.
 
-![Surface plot](../resources/surface.png)
+![A surface plot](../resources/surface.png)
 
 The `view_angle` attribute is a tuple consisting to two angles, the
 *azimumth* and *elevation*, that define the direction from which the
@@ -120,9 +120,9 @@ surface(x, y, z, xlabel=L"x", ylabel=L"y", zlabel=L"z",
 we change the azimuth to $135$ degrees and the elevation to $10$ degrees,
 resulting in the following plot.
 
-![Change viewing angle](../resources/surface_view_angle.png)
+![View from another angle](../resources/surface_view_angle.png)
 
-# Quiver Plots
+## Quiver Plots
 
 A *quiver plot* is used to visualise a 2D vector field, that is, a
 vector valued function 
@@ -145,15 +145,15 @@ quiver(X, Y, quiver=(sU, sV))
 At each point `(X[i,j], Y[i,j])`, an arrow is drawn from this point
 to `(X[i,j] + sU[i,j], Y[i,j] + sV[i,j])`.
 
-![Quiver plot](../resources/quiverplot.png)
+![A quiver plot](../resources/quiverplot.png)
 
-# Alternative Graphics Backends
+## Alternative Graphics Backends
 
 The `Plots` package relies on a software *backend* to create its graphical
 output.  The default backend is called [`GR`](https://gr-framework.org/) and 
-is the one most likely to work reliably.  Usually the output looks pretty much 
-the same for any choice of backend, but sometimes a particular backend might 
-offer extra features.  For example, the 
+is the one most likely to work reliably out of the box.  Usually the output 
+looks pretty much the same for any choice of backend, but sometimes a 
+particular backend might offer extra features.  For example, the 
 [`Plotly`](https://plotly.com/graphing-libraries/) backend supports mouse 
 interaction to change the viewing angle in a 3D plot.  If you install the 
 `Plotly` package, do
@@ -175,7 +175,7 @@ for 3D plots.
 
 * * *
 
-# Summary
+## Summary
 
 In this lesson, we have seen how the `Plots` package is used to produce a
 
@@ -185,16 +185,12 @@ In this lesson, we have seen how the `Plots` package is used to produce a
 * surface plot;
 * quiver plot.
 
-# Further Reading
+## Further Reading
 
-The [Plots documentation](https://docs.juliaplots.org/latest/) explains the
-capabilities of the package in greater depth.  In particular, there is a
+The [`Plots` documentation](https://docs.juliaplots.org/latest/) includes a
 [gallery](https://docs.juliaplots.org/latest/gallery/gr/) of examples that
 you can look through if you are not sure how to go about creating a
 particular kind of plot or achieving a particular effect.  The different
 [backends](https://docs.juliaplots.org/stable/backends/) are also discussed.
-You can easily produce many standard statistical plots using the
-[StatsPlots](https://docs.juliaplots.org/latest/generated/statsplots/)
-package.  
 
 [**Back to All Lessons**](../index.html)

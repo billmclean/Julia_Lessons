@@ -5,8 +5,6 @@ title: Lesson 2\. Names
 > There are only two hard things in Computer Science: cache invalidation and
 > naming things. [Phil Karlton](https://quotesondesign.com/phil-karlton/)
 
-# Lesson 2. Names
-
 ## Objectives
 The aim of this lesson is to understand the use of variables and functions.
 We have already made informal use of both in previous lessons, but will now 
@@ -43,6 +41,10 @@ that require more than one word, as in the next example.
 ```
 escape_velocity = 11.2 
 ```
+This example also illustrates the fact that underscores can be used to 
+make a long number easier to read by separating the digits into groups.  
+(Julia just ignores the underscores, so `40_270` is interpreted as `40270`.)
+
 A variable name consisting *only* of underscores has a special status: such
 a variable can be assigned a value, which is immediately discarded and
 cannot be used in a subsequent expression.  For example, if a function 
@@ -73,9 +75,9 @@ would be `Yes` and `No` (or `Yea` and `Nay`).
 
 ## Assigning Values
 
-The equal sign `=` is used to assign a value to a variable. The value can 
-be a literal constant, as in the `escape_velocity` example above, or an 
-expression. Consider the following statements.
+We have seen already that the equal sign `=` is used to assign a value to 
+a variable. The value can be a literal constant, as in the `escape_velocity` 
+example above, or an expression. Consider the following statements.
 ```
 x = 4
 x = x + 1/x
@@ -142,7 +144,8 @@ The `*` may be omitted following a numeric literal coefficient so that,
 for example, Julia interprets `2x` as `2 * x`, and `5(a+3)` as `5 * (a+3)`.
 There are a few exceptions.  In particular, `3.2e-5` is always interpreted
 as the floating-point number $3.2\times 10^{-5}$, and not the
-expression `3.2 * e - 5`.
+expression `3.2 * e - 5`.  Note, however, that no space is permitted 
+immediately following the coefficient.  Thus, `2 x` will throw an error.
 
 **Exercise.** Perform some experiments to determine if `2x^2` is interpreted
 as `(2x)^2` or `2(x^2)`.  What about `2^2x`?
@@ -245,7 +248,7 @@ to get a summary of what this module provides.  You can also use tab completion
 to see a list of the objects in a module.  Try typing `Dates.` followed by a
 double TAB.
 
-**Exercise.** What happens if you type `Dates.day` followed by TAB?
+**Exercise.** What happens if you type `Dates.day` followed by a double TAB?
 
 Each module constitutes a distinct *namespace*, which means that there is
 nothing to stop programmers from using the same name for different objects

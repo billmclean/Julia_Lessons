@@ -2,8 +2,6 @@
 title: Lesson 3\. Vectors
 ---
 
-# Lesson 3. Vectors
-
 ## Objectives
 
 Any programming language that deals with mathematical problems must provide
