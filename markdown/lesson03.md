@@ -69,15 +69,12 @@ given by
 but now `p` is the *largest* integer such that `i+p*s` is *greater* than or
 equal to `j`.  For example, `b[8:-2:2]` is the vector `[8, 6, 4, 2]`.
 
-Instead of `v[1:j]` you can type `v[:j]`, and instead of `v[i:end]` you can
-just type `v[i:]`.
-
 
 **Exercise.** For the vector `b` given above, write out by hand each of the 
 following vectors, and then check your answers using the REPL.
 ```
 b[2:3:9]
-b[:4]
+b[1:4]
 b[7:-2:1]
 ```
 

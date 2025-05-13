@@ -5,4 +5,4 @@ for n = 3:N
     F[n] = F[n-1] + F[n-2]
 end
 println("The first $N Fibbonaci numbers:")
-display(F)
+display(F')

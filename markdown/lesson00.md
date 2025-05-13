@@ -30,13 +30,14 @@ examples and exercises while reading.
 The lessons aim to provide the minimum necessary information for you to make 
 effective use of Julia in your courses.  At the end of each lesson, we 
 provide suggestions for further reading. The Linux version of Julia is 
-available on the PCs in the Maths & Stats computer labs.  To run Julia and
-VSCode on your own computer, you can download the installers for your
-operating system (Windows, MacOS or Linux) from
-[https://julialang.org](https://julialang.org) and 
-[https://code.visualstudio.com/download](
-https://code.visualstudio.com/download).
-Windows users can also install Julia and VSCode from the Windows store.
+available on the PCs in the Maths & Stats computer labs.  To run Julia on your
+own computer, follow [these instructions](https://julialang.org/install/) to
+install the latest stable version of Julia and a small console program called 
+`juliaup` that is used for updating Julia.  To run VSCode on your own computer,
+follow the 
+[setup instructions](https://code.visualstudio.com/docs/setup/setup-overview)
+for your operating system; Windows, MacOS and Linux are all supported.
+Windows users can also install VSCode from the Windows store.
 After installing both applications, follow
 [these instructions](https://code.visualstudio.com/docs/languages/julia) to
 install the Julia extension for VSCode.
@@ -126,10 +127,8 @@ logo.
 
 ![VSCode logo](../resources/vscode.png){width=20%}
 
-To use VSCode on your own computer, download the 
-[installer](https://code.visualstudio.com/download).  When you start VSCode,
-either from a terminal or via the launcher, a window should open that looks 
-something like the screenshot below.
+When you start VSCode, either from a terminal or via the launcher, a window 
+should open that looks something like the screenshot below.
 
 ![VSCode window](../resources/VSCode-welcome.png)
 

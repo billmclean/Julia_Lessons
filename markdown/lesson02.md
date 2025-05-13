@@ -64,7 +64,7 @@ the variable `x` will have the value `6`.
 
 Julia has certain *reserved words* that have special meanings in the 
 language and so are not available for use as identifiers.  These reserved
-words are `begin`, `while`, `if`, `for`, `try`, `return`, `break`, 
+words include `begin`, `while`, `if`, `for`, `try`, `catch`, `return`, `break`, 
 `continue`, `function`, `macro`, `quote`, `let`, `local`, `global`, 
 `const`, `do`, `struct`, `module`, `baremodule`, `using`, `import`, `export`.
 
@@ -200,11 +200,10 @@ gives the `Float32` result `6.141593f0`.
 ## Modules and Names
 
 Julia has a large standard library organised into *modules*.  For example,
-suppose that we would like to know the day of the week for 19 June, 1956.
-The standard library includes a `Dates` module that provides functions useful
-for any computations involving dates and times.  Before we can use these 
-functions, we first need to tell Julia to make them available by typing the
-command
+what day of the week was 19 June, 1956?  The standard library includes a `Dates`
+module that provides functions useful for any computations involving dates 
+and times.  Before we can use these functions, we first need to tell Julia to 
+make them available by typing the command
 ```
 using Dates
 ```
@@ -284,7 +283,7 @@ starts.  The `Base` module is where commonly used functions like `sin` and
 
 We have seen
 
-* what counts as a valid name for Julia identifier;
+* what counts as a valid name for a Julia identifier;
 * how to assign a value to a variable and use the variable in an expression;
 * that, in the REPL, a semicolon at the end of an assigment suppresses the 
 usual printing of the assigned value;

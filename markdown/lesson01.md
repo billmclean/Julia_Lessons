@@ -223,7 +223,7 @@ perhaps, is that expressions involving `Inf` can yield finite results.
 For example, try the following in the REPL.
 ```
 atan(Inf)
-tahn(-Inf)
+tanh(-Inf)
 cos(1/Inf)
 ```
 However, some arithmetic expressions cannot be given any
