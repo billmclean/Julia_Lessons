@@ -167,6 +167,28 @@ see the output below appear in the REPL pane.
 
 When you are finished, close VSCode by selecting "Exit" from the File menu.
 
+## Julia Statements
+
+You can see from `fibonacci.jl` that a Julia statement usually takes up one line
+and does not need to be terminated by a semicolon as in some other programming 
+languages such as C or Java.  A semicolon is sometimes used to write more than 
+one statement on the same line, such as
+```
+x = 3; y = 4
+```
+and in the REPL a terminating semicolon suppresses printing of the result.
+Occasionally, you might need to split an unusually long statement across more
+than one line, which can be done using parentheses, as in the following example.
+```
+some_very_long_identifier = ( x * some_very_long_function_name(y, z)
+                             - exp(x^2 + y^2) * cospi(n*z) )
+```
+Here, the Julia compiler knows that the first line is not a complete statement
+because it contains two opening parentheses but only one closing parenthesis.
+Only after reading the next line will the numbers of opening and closing 
+parentheses match, at which point the compiler knows that it has a complete
+statement.
+
 ## Summary
 
 In this lesson you have seen how to

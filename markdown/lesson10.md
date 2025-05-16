@@ -37,10 +37,10 @@ available, as well as support for LaTeX.
 The basic `plot` command can be used to plot a parametric curve, as in the
 following example that plots an ellipse.
 ```
-t = range(-1, 1, length=301)
+t = range(-1, 1, 301)
 x = 3 * cospi.(t)
 y = sinpi.(t)
-plot(x, y, xlabel="x", ylabel="y", 
+plot(x, y; xlabel="x", ylabel="y", 
      label="ellipse", aspect_ratio=:equal)
 ```
 The output is shown below.
@@ -57,13 +57,13 @@ scale on the y-axis will often allow the behaviour of the curve to be seen
 more clearly.  In the next example, we set `yscale=:log10` in the lower
 subplot.  Note also the `L"..."` syntax for a LaTeX string.
 ```
-x = range(0, 200, length=301)
+x = range(0, 200, 301)
 y1 = 1 ./ (1 .+ x).^2
 y2 = 1 ./ (1 .+ x).^4
-p1 = plot(x, [y1 y2], label=[L"(1+x)^{-2}"  L"(1+x)^{-4}"])
-p2 = plot(x, [y1 y2], yscale=:log10, xlabel=L"x",
+p1 = plot(x, [y1 y2]; label=[L"(1+x)^{-2}"  L"(1+x)^{-4}"])
+p2 = plot(x, [y1 y2]; yscale=:log10, xlabel=L"x",
           label=[L"(1+x)^{-2}"  L"(1+x)^{-4}"])
-plot(p1, p2, layout=(2, 1))
+plot(p1, p2; layout=(2, 1))
 ```
 The output is as follows.
 
@@ -81,10 +81,10 @@ of values for $c$.
 If $f(x,y)=x^3-3x+y^2$ then we can create a contour plot of $f$ as follows.
 ```
 f(x, y) = x^3 - 3x + y^2
-x = range(-3, 3, length=250)
-y = range(-4, 4, length=200)
+x = range(-3, 3, 250)
+y = range(-4, 4, 200)
 z = f.(x', y)
-contour(x, y, z, xlabel=L"x", ylabel=L"y", levels=20)
+contour(x, y, z; xlabel=L"x", ylabel=L"y", levels=20)
 ```
 Here, `z` is a $200\times250$ matrix with `z[i,j] = f(x[j], y[i])`, since 
 `x'` is $1\times250$ and `y` has length $200$.  The output is shown below.
@@ -101,7 +101,7 @@ Another way to visualise a real-valued function $f(x, y)$ is to plot
 the graph, $z=f(x,y)$, in xyz-space.  With the vectors `x`, `y` and `z` 
 defined as in the contour plot example above,
 ```
-surface(x, y, z, xlabel=L"x", ylabel=L"y", zlabel=L"z")
+surface(x, y, z; xlabel=L"x", ylabel=L"y", zlabel=L"z")
 ```
 produces the following output.
 
@@ -114,7 +114,7 @@ negative y-axis in the xy-plane.  Elevation is the angle above the
 xy-plane.  Both are measured in degrees, and the default `view_angle` is
 `(30,30)`.  In the command
 ```
-surface(x, y, z, xlabel=L"x", ylabel=L"y", zlabel=L"z",
+surface(x, y, z; xlabel=L"x", ylabel=L"y", zlabel=L"z",
         view_angle=(135,10))
 ```
 we change the azimuth to $135$ degrees and the elevation to $10$ degrees,
@@ -131,8 +131,8 @@ f(x, y)=\begin{bmatrix}u(x,y)\\ v(x,y)\end{bmatrix}.
 $$
 In the example below, $u=\sin y$ and $v=-x$.
 ```
-x = range(-1, 1, length=15)
-y = range(-π, π, length=15)
+x = range(-1, 1, 15)
+y = range(-π, π, 15)
 X = [ x[j] for i = 1:15, j=1:15 ]
 Y = [ y[i] for i = 1:15, j=1:15 ]
 U = sin.(Y)
@@ -140,7 +140,7 @@ V = -X
 scale = 0.1
 sU = scale * U
 sV = scale * V
-quiver(X, Y, quiver=(sU, sV))
+quiver(X, Y; quiver=(sU, sV))
 ```
 At each point `(X[i,j], Y[i,j])`, an arrow is drawn from this point
 to `(X[i,j] + sU[i,j], Y[i,j] + sV[i,j])`.

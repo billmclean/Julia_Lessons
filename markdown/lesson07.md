@@ -41,9 +41,9 @@ n = codepoint('G')
 ```
 assigns to `n` the code point for an upper-case letter 'G', which turns out 
 to be `0x00000047`.  Here, `n` is an *unsigned 32-bit integer*, or `UInt32`,
-and the eight digits following the `0x` give the hexadecimal representation
-of `n`.  Thus, `n` has the decimal value $4\times16+7\times1=71$, as you can
-verify by typing `Int64(n)`.  Conversely, doing
+and the eight digits following the `0x` give the hexadecimal (base 16)
+representation of `n`.  Thus, `n` has the decimal value $4\times16+7\times1=71$,
+as you can verify by typing `Int64(n)`.  Conversely, doing
 ```
 Char(n)
 ```
@@ -153,10 +153,10 @@ in this example, `length(s)` returns `29`.
 Things become more complicated if we allow non-ASCII characters.  Consider,
 for instance
 ```
-q = "∀ ϵ > 0 ∃ > 0"
+q = "∀ ϵ > 0 ∃ δ > 0"
 ```
-We find that `length(q)` returns `13`, the number of characters (including
-the spaces), but `ncodeunits(q)` returns `18`, because some of the characters 
+We find that `length(q)` returns `15`, the number of characters (including
+the spaces), but `ncodeunits(q)` returns `21`, because some of the characters 
 require more than one code unit.  In particular, `'∀'` uses three code units, 
 and we find that `q[1]` gives `'∀'`, but `q[2]` and `q[3]` each throw a
 `StringIndexError`.  Putting
@@ -169,7 +169,7 @@ v = [ q[k] for k in i ]
 ```
 creates a `Vector{Char}` from the characters in `q`, and `print(v)` produces
 ```
-['∀', ' ', 'ϵ', ' ', '>', ' ', '0', ' ', '∃', ' ', '>', ' ', '0']
+['∀', ' ', 'ϵ', ' ', '>', ' ', '0', ' ', '∃', ' ', 'δ', ' ', '>', ' ', '0']
 ```
 You can see the vector of valid indices by typing `collect(i)`.
 
@@ -303,9 +303,19 @@ produces
 |  2.2026e+04|
 ```
 Notice that in each case, the output is right-justified, which is useful
-when printing tables. Also, note that we need to append a trailing newline
-character `\n` to the format string if we want subsequent output to follow
-on the next line.
+when printing tables.  Prepending the field width with a `-` changes the
+output to be left-justified.  For example,
+```
+@printf("|%-10.4f|\n", π)
+@printf("|%-12.4e|\n", exp(10))
+```
+produces
+```
+|3.1416    |
+|2.2026e+04  |
+```
+Also, note that the format string needs to end with a newline character `\n` 
+to if we want subsequent output to follow on the next line.
 
 ## Docstrings
 
@@ -347,7 +357,7 @@ This lesson described how
 * the newline and backslash characters can force or inhibit a line break;
 * a triple quoted string can preserve the line breaks in a long string
 extending over several lines;
-* indexing works for strings, but complications associated if non-ASCII 
+* indexing works for strings, but complications can arise if non-ASCII 
 characters are present;
 * to concatenate or repeat a string;
 * to insert the value of a variable into a string;

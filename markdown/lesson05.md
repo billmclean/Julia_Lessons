@@ -16,7 +16,7 @@ should know how to
 
 * create a simple xy-plot;
 * display multiple sub-plots in a single figure window;
-* incorporates axis labels, a title, a grid and a legend;
+* incorporate axis labels, a title, a grid and a legend;
 * create some more specialised plots such a polar plots and histograms.
 
 A later lesson will cover more advanced plotting techniques.
@@ -36,12 +36,17 @@ a lot of dependencies, so the installation might take some time.)
 
 Type the following commands to create a simple plot of the sine function.
 ```
-x = range(0, 2π, length=201)
+x = range(0, 2π, 201)
 y = sin.(x)
 plot(x, y)
 ```
 You should see a plotting pane open in VSCode, looking like the following
-screenshot.
+screenshot.  If you are running Julia in a terminal instead of in VSCode,
+then you might have to type the command
+```
+gui()
+```
+before the plot window opens.
 
 ![Sine plot](../resources/sine_plot.png)
 
@@ -70,7 +75,7 @@ instead of $201$.
 
 You can modify the plot style using keyword arguments. For example,
 ```
-plot(x, y, linestyle=:dash)
+plot(x, y; linestyle=:dash)
 ```
 produces a dashed curve instead of a solid one.  Other possible line styles
 include `:solid` (the default), `:dot`, `:dashdot` and `:dashdotdot`.  
@@ -83,7 +88,7 @@ plotattr("linestyle")
 lists the available line styles, and also lists the accepted abbreviations
 `ls`, `s` and `style`.  For instance, to save typing we could do
 ```
-plot(x, y, ls=:dash)
+plot(x, y; ls=:dash)
 ```
 
 If we call `plotattr` with no argument,
@@ -92,18 +97,17 @@ plotattr()
 ```
 then `julia>` prompt changes to `>`, and you can search for possible
 attributes.  Try typing `line` to get a list including `linecolor`. 
-Type Ctrl-D (as the first character on a new line) to get back to the 
-`julia>` prompt, and then try
+Type Enter to get back to the `julia>` prompt, and then try
 ```
-plot(x, y, linecolor=:red)
+plot(x, y; linecolor=:red)
 ```
 
 As well as plotting curves, you can also plot discrete data using a variety
 of different marker symbols using the `scatter` function.  For example,
 ```
-x = range(1, 5, length=9)
-y = exp.(-x/2) + 2 * sin.(40x)
-scatter(x, y, markershape=:circle, markercolor=:green)
+x = range(1, 5, 9)
+y = exp.(-x/2) + 2sin.(40x)
+scatter(x, y; markershape=:circle, markercolor=:green)
 ```
 
 ## Plot Annotations
@@ -114,9 +118,9 @@ a new editor pane in VSCode, type the following lines of code and save to
 a file `sine_plot.jl`.
 ```
 using Plots
-x = range(0, 2π, length=201)
+x = range(0, 2π, 201)
 y = sin.(x)
-plot(x, y, 
+plot(x, y;
      xlabel="x", ylabel="y", 
      title="The Graph of y = sin(x)",
      legend=false)
@@ -139,7 +143,7 @@ data values.  You can use the `plot!` function (with an exclamation mark) to
 add an additional series to an existing plot.  Try typing the following
 in the REPL, and observe how the figure changes after each line.
 ```
-x = range(0, π, length=201)
+x = range(0, π, 201)
 y1 = sin.(3x)
 plot(x, y1)
 y2 = cos.(2x .- π)
@@ -171,13 +175,13 @@ series on different pairs of axes.  Type the following lines into a file
 `my_subplots.jl` and then run the code.
 ```
 using Plots
-x1 = range(-4, 4, length=201)
+x1 = range(-4, 4, 201)
 y1 = exp.(-x1.^2)
-p1 = plot(x1, y1, legend=false)
-x2 = range(0, 10, length=201)
+p1 = plot(x1, y1; legend=false)
+x2 = range(0, 10, 201)
 y2 = log.(x2) .* sinpi.(x2)
-p2 = plot(x2, y2, legend=false)
-plot(p1, p2, layout=(2, 1), size=(750,500))
+p2 = plot(x2, y2; legend=false)
+plot(p1, p2; layout=(2, 1), size=(750,500))
 ```
 Here, we create two `Plot` objects `p1` and `p2`, and then plot them
 using the `plot` command with the `layout` keyword argument.  In this case,
@@ -192,9 +196,9 @@ the plot by 25% from the default of $600\times400$ to $750\times500$.
 We can adjust the location and labels of the tick marks on an axis using
 the `xticks` and `yticks` keyword arguments.  For example,
 ```
-x = range(0, 2π, length=201)
+x = range(0, 2π, 201)
 y = sin.(x)
-plot(x, y, legend=false,
+plot(x, y; legend=false,
      xticks = ([0, π/2, π, 3π/2, 2π], ["0", "π/2", "π", "3π/2", "2π"]))
 ```
 produces
@@ -204,11 +208,11 @@ produces
 Manual adjustment of axis limits is also possible, using the `xlims` and
 `ylims` keywords.  Consider
 ```
-x = range(0, 2, length=201)
+x = range(0, 2, 201)
 y = 1 .+ 0.1 * cospi.(x)
-p1 = plot(x, y, legend=false)
-p2 = plot(x, y, ylims=(0, 1.5), legend=false)
-plot(p1, p2, layout=(1, 2))
+p1 = plot(x, y; legend=false)
+p2 = plot(x, y; ylims=(0, 1.5), legend=false)
+plot(p1, p2; layout=(1, 2))
 ```
 which produces
 
@@ -222,7 +226,7 @@ x=r\cos\theta\quad\text{and}\quad y=r\sin\theta.
 $$
 We can plot the curve $r=1+\cos\theta$ for $-\pi\le\theta\le\pi$ as follows.
 ```
-θ = range(-π, π, length=201)
+θ = range(-π, π, 201)
 r = 1 .+ cos.(θ)
 plot(θ, r, projections=:polar, legend=false)
 ```

@@ -58,7 +58,7 @@ and ask if you want to install it.  Type `y` and Julia will download and install
 `Roots` as well as any of its dependencies, that is, any other packages that 
 `Roots` needs.  
 
-`Roots` provided the `find_zero` function that takes as its first argument 
+`Roots` provides the `find_zero` function that takes as its first argument 
 the function `f` whose zero we wish to find, and as its second argument an 
 interval bracketing the zero, with `f` positive at one end and negative at 
 the other.  Here, the 'interval' is really a vector `[a, b]` or tuple 
@@ -77,32 +77,32 @@ close to the machine epsilon.
 ## Argument Passing
 
 A Julia function can have any number of arguments and any number of return
-variables.  Consider the (mathematical) function $g:\textbf{R}^2\to\textbf{R}^2$
+variables.  Consider the (mathematical) function $g:\textbf{R}^3\to\textbf{R}^2$
 defined by
 $$
-g(x,y)=(2x-y, x^2+\cos(xy)).
+g(x,y,z)=(2x-y+z, x^2+z\cos(xy)).
 $$
 At the `julia>` prompt, type
 ```
-g(x,y) = (2x - y, x^2 + cos(x*y))
-g(1, 3)
+g(x,y) = (2x - y + z, x^2 + z*cos(x*y))
+g(1, 3, -2)
 ```
-and observe that the return value is the tuple `(-1, 0.010007503399554585)`.
+and observe that the return value is the tuple `(-3, 2.979984993200891)`.
 We could also do
 ```
-t = g(1, 3)
+t = g(1, 3, -2)
 ```
-in which case `t` gets assigned the tuple `(-1, 0.010007503399554585)`,
+in which case `t` gets assigned the tuple `(-3, 2.979984993200891)`,
 or alternatively
 ```
-a, b = g(1, 3)
+a, b = g(1, 3, -2)
 ```
-so that `a` gets assigned `-1`, and `b` gets assigned `0.010007503399554585`.
+so that `a` gets assigned `-3`, and `b` gets assigned `2.979984993200891`.
 
 The *dummy arguments* of a function are the names used in the *definition*
 of a function, whereas the *actual arguments* are the values supplied when
 we *call* a function.  Thus, in our example, the dummy arguments of `g` are
-`x` and `y`, whereas the actual arguments are `1` and `3`.  When the 
+`x`, `y` and `z`, whereas the actual arguments are `1`, `3` and `-2`.  When the 
 function is called, the kth actual argument gets assigned to the kth dummy
 argument, then the code that defines the function is executed, and result(s)
 are returned.
@@ -112,10 +112,11 @@ if feeling perverse, type
 ```
 x = 3
 y = 1
-g(y, x)
+z = -2
+g(y, x, z)
 ```
-and the result would be the same as typing `g(1, 3)`.  In practice, to avoid 
-confusion, we most often use the same names for actual arguments as those
+and the result would be the same as typing `g(1, 3, -2)`.  In practice, to 
+avoid confusion, we most often use the same names for actual arguments as those
 used for the dummy arguments, except when the former are literal constants
 like `1` and `3`.
 
@@ -128,7 +129,7 @@ take more than two arguments.  It has five *positional arguments* and several
 *keyword arguments*.  Only the first two arguments, the function and interval, 
 are required.  By doing
 ```
-z = find_zero(f, (0.5, 1.0), verbose=true)
+z = find_zero(f, (0.5, 1.0); verbose=true)
 ```
 we can see that `find_zero` used 51 iterations of the bisection algorithm,
 requiring 54 evaluations of `f`, to compute `z`.  If we instead do
@@ -136,7 +137,8 @@ requiring 54 evaluations of `f`, to compute `z`.  If we instead do
 z = find_zero(f, (0.5, 1.0), Order2(); verbose=true)
 ```
 then the more efficient `Order2()` algorithm uses only 5 iterations
-requiring 9 evaluations of `f`.
+requiring 9 evaluations of `f`.  The positional arguments must come first,
+followed by a semicolon, and then any keyword arguments.
 
 It is also possible to provide a *default value* for a dummy argument.  This
 default value is used when the corresponding actual argument is omitted from
@@ -152,7 +154,7 @@ normal distribution with mean `3.0` and standard deviation `0.5`.
 
 ## Local Variables
 
-For the functions `f` and `g` above, the return value could be calculated 
+For the functions `f` and `g` above, the return value(s) could be calculated 
 with just a single expression, but often more lines of code are needed.
 For example, consider the problem of computing the solutions of a quadratic 
 equation $ax^2+bx+c=0$.  From VSCode, open a convenient folder and then open 
@@ -336,7 +338,7 @@ It is a convention in Julia that if a function can mutate any one of its
 arguments then the function name should finish with the exclamation 
 character `!` as a visual warning to anyone reading the code.
 
-# Macros
+## Macros
 
 A *macro* is a rule or pattern for transforming a tuple of arguments to a
 returned expression that Julia evaluates.  In Julia, the name of every

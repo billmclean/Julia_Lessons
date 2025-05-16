@@ -154,8 +154,9 @@ If we then do
 ```
 y = x
 ```
-then the vector `y` will reference the same storage as `x`.  This means
-that any change to `y` also affects `x`.  For example, 
+then the vector `y` will reference the same storage as `x`, that is,
+`y[i]` accesses the same 8 bytes of the computer memory as `x[i]`.
+This means that any change to `y` also affects `x`.  For example, 
 ```
 y[4] = 1
 ```
@@ -185,7 +186,7 @@ and `t[4]` equals `7`.
 
 However, unlike a vector, a tuple is *immutable*.  Thus, although an
 assignment like `a = t[3]` is perfectly fine, attempting to do 
-like `t[3] = 5` will throw a `MethodError`.  The only way to change `t[3]` 
+`t[3] = 5` will throw a `MethodError`.  The only way to change `t[3]` 
 is to create a new tuple and assign it to `t`:
 ```
 t = (2, -1, 5, 7)
@@ -202,7 +203,7 @@ In this lesson, we have seen how to
 
 * construct a vector by listing its elements;
 * reference individual elements of a vector;
-* extract regularly space elements of a vector to create a new vector;
+* extract regularly spaced elements of a vector to create a new vector;
 * perform arithmetic operations on vectors;
 * construct vectors using functions such as `zeros` provided by Julia;
 * use concatenation to combine vectors;

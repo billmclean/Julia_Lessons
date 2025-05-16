@@ -13,3 +13,4 @@ title: Julia Lessons
 8. [Logic and Control](html/lesson08.html)
 9. [Files](html/lesson09.html)
 10. [More on Graphics](html/lesson10.html)
+11. [Modules and Projects](html/lesson11.html)
