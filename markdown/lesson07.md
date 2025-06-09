@@ -315,7 +315,7 @@ produces
 |2.2026e+04  |
 ```
 Also, note that the format string needs to end with a newline character `\n` 
-to if we want subsequent output to follow on the next line.
+if we want subsequent output to follow on the next line.
 
 ## Docstrings
 
